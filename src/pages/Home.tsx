@@ -2,8 +2,9 @@ import { useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { ArrowRight, Target, Users, Lightbulb, Shield, Sparkles, TrendingUp, ArrowUpRight } from "lucide-react";
+import { ArrowRight, Target, Users, Lightbulb, Shield, Sparkles, TrendingUp, ArrowUpRight, Award, Briefcase, TrendingUp as TrendingUpIcon, Star } from "lucide-react";
 import heroImage from "@/assets/hero-bg.jpg";
+import { useCountUp } from "@/hooks/useCountUp";
 
 const Home = () => {
   const parallaxRef = useRef<HTMLDivElement>(null);
@@ -207,6 +208,26 @@ const Home = () => {
         </div>
       </section>
 
+      {/* Section chiffres clés */}
+      <section className="py-32 bg-gradient-to-br from-primary via-primary to-primary-light text-primary-foreground relative overflow-hidden">
+        <div className="absolute inset-0 opacity-10">
+          <div className="absolute inset-0" style={{ backgroundImage: "radial-gradient(circle at 2px 2px, white 1px, transparent 0)", backgroundSize: "40px 40px" }} />
+        </div>
+
+        <div className="container mx-auto px-8 relative z-10">
+          <div className="text-center mb-20">
+            <h2 className="text-5xl md:text-6xl font-display font-bold mb-6 tracking-tight">
+              Nos Résultats en Chiffres
+            </h2>
+            <p className="text-xl text-primary-foreground/90 max-w-2xl mx-auto font-light">
+              Des années d'excellence au service de vos ambitions
+            </p>
+          </div>
+
+          <StatsGrid />
+        </div>
+      </section>
+
       {/* Références clients */}
       <section className="py-24 bg-muted/30">
         <div className="container mx-auto px-8">
@@ -364,4 +385,62 @@ const Home = () => {
   );
 };
 
+const StatsGrid = () => {
+  const stats = [
+    {
+      icon: Award,
+      end: 15,
+      suffix: "+",
+      label: "Années d'expérience",
+    },
+    {
+      icon: Users,
+      end: 200,
+      suffix: "+",
+      label: "Clients accompagnés",
+    },
+    {
+      icon: Briefcase,
+      end: 500,
+      suffix: "+",
+      label: "Projets réalisés",
+    },
+    {
+      icon: Star,
+      end: 98,
+      suffix: "%",
+      label: "Taux de satisfaction",
+    },
+  ];
+
+  return (
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+      {stats.map((stat, index) => (
+        <StatCard key={index} {...stat} index={index} />
+      ))}
+    </div>
+  );
+};
+
+const StatCard = ({ icon: Icon, end, suffix, label, index }: { icon: any; end: number; suffix: string; label: string; index: number }) => {
+  const { count, ref } = useCountUp({ end, duration: 2500 });
+
+  return (
+    <div
+      ref={ref}
+      className="text-center p-8 rounded-3xl bg-primary-foreground/10 backdrop-blur-sm border border-primary-foreground/20 hover:bg-primary-foreground/15 transition-all duration-500 group"
+      style={{ animationDelay: `${index * 0.1}s` }}
+    >
+      <div className="mb-6 inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-primary-foreground/10 group-hover:scale-110 transition-transform duration-500">
+        <Icon className="text-primary-foreground" size={32} strokeWidth={1.5} />
+      </div>
+      <div className="text-6xl font-display font-bold mb-3 tracking-tight">
+        {count}{suffix}
+      </div>
+      <p className="text-lg text-primary-foreground/80 font-light">{label}</p>
+    </div>
+  );
+};
+
 export default Home;
+

@@ -57,7 +57,7 @@ export default {
         },
       },
       fontFamily: {
-        serif: ['Playfair Display', 'serif'],
+        display: ['Space Grotesk', 'sans-serif'],
         sans: ['Inter', 'sans-serif'],
       },
       borderRadius: {

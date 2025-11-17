@@ -208,6 +208,61 @@ const Home = () => {
         </div>
       </section>
 
+      {/* Notre travail */}
+      <section className="py-32 bg-background">
+        <div className="container mx-auto px-8">
+          <div className="flex justify-between items-end mb-16">
+            <div>
+              <h2 className="text-5xl md:text-6xl font-display font-bold mb-4 tracking-tight">
+                Notre Travail
+              </h2>
+              <p className="text-xl text-muted-foreground font-light">
+                Découvrez nos projets récents et leur impact
+              </p>
+            </div>
+            <Link to="/portfolio">
+              <Button variant="ghost" className="group rounded-full">
+                Voir tout
+                <ArrowUpRight className="ml-2 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" size={18} />
+              </Button>
+            </Link>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            {projects.map((project, index) => (
+              <div
+                key={index}
+                className="group relative overflow-hidden rounded-3xl cursor-pointer"
+                style={{
+                  aspectRatio: "4/5",
+                  background: project.image,
+                }}
+              >
+                <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/80 group-hover:to-black/90 transition-all duration-500" />
+                
+                <div className="absolute inset-0 p-8 flex flex-col justify-end">
+                  <div className="mb-4">
+                    <span className="inline-block px-4 py-1.5 bg-white/10 backdrop-blur-sm rounded-full text-xs font-medium text-white/90 border border-white/20">
+                      {project.category}
+                    </span>
+                  </div>
+                  <h3 className="text-2xl font-display font-bold text-white mb-3 group-hover:text-accent transition-colors duration-300">
+                    {project.title}
+                  </h3>
+                  <p className="text-white/80 font-light leading-relaxed mb-4">
+                    {project.description}
+                  </p>
+                  <div className="flex items-center text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <span className="text-sm font-medium">Voir le projet</span>
+                    <ArrowUpRight size={16} className="ml-1" />
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Section chiffres clés */}
       <section className="py-32 bg-gradient-to-br from-primary via-primary to-primary-light text-primary-foreground relative overflow-hidden">
         <div className="absolute inset-0 opacity-10">
@@ -246,59 +301,6 @@ const Home = () => {
               >
                 <div className="text-4xl font-display font-bold text-muted-foreground/30 group-hover:text-primary/60 transition-colors duration-300">
                   {client.abbr}
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Notre travail */}
-      <section className="py-32 bg-background">
-        <div className="container mx-auto px-8">
-          <div className="flex justify-between items-end mb-16">
-            <div>
-              <h2 className="text-5xl md:text-6xl font-display font-bold mb-4 tracking-tight">
-                Notre Travail
-              </h2>
-              <p className="text-xl text-muted-foreground font-light">
-                Découvrez nos projets récents et leur impact
-              </p>
-            </div>
-            <Link to="/portfolio">
-              <Button variant="ghost" className="group rounded-full">
-                Voir tout
-                <ArrowUpRight className="ml-2 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" size={18} />
-              </Button>
-            </Link>
-          </div>
-
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            {projects.map((project, index) => (
-              <div
-                key={index}
-                className="group relative overflow-hidden rounded-3xl cursor-pointer"
-                style={{
-                  aspectRatio: "4/5",
-                  background: project.image,
-                }}
-              >
-                <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/80 group-hover:to-black/90 transition-all duration-500" />
-                
-                <div className="absolute inset-0 p-8 flex flex-col justify-end">
-                  <span className="text-primary-foreground/70 text-sm font-medium mb-2 tracking-wide">
-                    {project.category}
-                  </span>
-                  <h3 className="text-2xl font-display font-bold text-primary-foreground mb-3 tracking-tight">
-                    {project.title}
-                  </h3>
-                  <p className="text-primary-foreground/80 mb-4 font-light">
-                    {project.description}
-                  </p>
-                  <div className="flex items-center text-primary-foreground opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <span className="text-sm font-medium">Voir le projet</span>
-                    <ArrowUpRight size={16} className="ml-1" />
-                  </div>
                 </div>
               </div>
             ))}

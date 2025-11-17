@@ -133,11 +133,10 @@ const Home = () => {
         {/* Hero Content */}
         <div className="container mx-auto px-8 text-center z-10">
           <h1 className="text-6xl md:text-8xl lg:text-9xl font-display font-bold mb-8 animate-fade-in-up text-primary-foreground tracking-tight">
-            Intelligence
-            <span className="block text-gradient-accent mt-4">Communicationnelle</span>
+            SIFEC — L'expertise qui donne du pouvoir à votre image.
           </h1>
           <p className="text-xl md:text-2xl mb-12 max-w-3xl mx-auto animate-fade-in-up text-primary-foreground/90 font-light" style={{ animationDelay: "0.2s" }}>
-            Agence de communication premium dédiée aux clients institutionnels et personnalités publiques
+            Votre partenaire stratégique pour une communication institutionnelle forte, cohérente et performante.
           </p>
           <div className="flex flex-col sm:flex-row gap-6 justify-center animate-fade-in-up" style={{ animationDelay: "0.4s" }}>
             <Link to="/contact">

@@ -32,13 +32,16 @@ const Contact = () => {
   return (
     <div className="min-h-screen pt-24">
       {/* Hero Section */}
-      <section className="py-20 bg-gradient-to-br from-primary to-primary-light text-primary-foreground">
-        <div className="container mx-auto px-6">
+      <section className="py-32 bg-gradient-to-br from-primary via-primary to-primary-light text-primary-foreground relative overflow-hidden">
+        <div className="absolute inset-0 opacity-10">
+          <div className="absolute inset-0" style={{ backgroundImage: "radial-gradient(circle at 2px 2px, white 1px, transparent 0)", backgroundSize: "40px 40px" }} />
+        </div>
+        <div className="container mx-auto px-8 relative z-10">
           <div className="max-w-4xl mx-auto text-center">
-            <h1 className="text-5xl md:text-6xl font-serif font-bold mb-6 animate-fade-in-up">
+            <h1 className="text-6xl md:text-8xl font-display font-bold mb-8 animate-fade-in-up tracking-tight">
               Contactez-<span className="text-accent">nous</span>
             </h1>
-            <p className="text-xl text-primary-foreground/90 animate-fade-in-up" style={{ animationDelay: "0.2s" }}>
+            <p className="text-2xl text-primary-foreground/90 animate-fade-in-up font-light" style={{ animationDelay: "0.2s" }}>
               Discutons de votre projet et de vos ambitions
             </p>
           </div>
@@ -46,16 +49,16 @@ const Contact = () => {
       </section>
 
       {/* Contact Section */}
-      <section className="py-24 bg-background">
-        <div className="container mx-auto px-6">
+      <section className="py-32 bg-background">
+        <div className="container mx-auto px-8">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 max-w-6xl mx-auto">
             {/* Contact Info */}
             <div className="space-y-8">
               <div>
-                <h2 className="text-3xl font-serif font-bold mb-6">
+                <h2 className="text-4xl font-display font-bold mb-6 tracking-tight">
                   Nos <span className="text-gradient-accent">coordonnées</span>
                 </h2>
-                <p className="text-muted-foreground leading-relaxed">
+                <p className="text-muted-foreground leading-relaxed font-light">
                   Notre équipe est à votre disposition pour échanger sur vos besoins en communication.
                 </p>
               </div>

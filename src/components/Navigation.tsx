@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
 
 const Navigation = () => {
@@ -22,6 +21,7 @@ const Navigation = () => {
     { path: "/expertise", label: "Expertise" },
     { path: "/portfolio", label: "Portfolio" },
     { path: "/blog", label: "Blog" },
+    { path: "/contact", label: "Contact" },
   ];
 
   return (
@@ -50,24 +50,16 @@ const Navigation = () => {
                 to={link.path}
                 className={`text-[15px] font-medium tracking-tight transition-colors duration-200 relative ${
                   location.pathname === link.path
-                    ? "text-foreground"
-                    : "text-muted-foreground hover:text-foreground"
+                    ? "text-white"
+                    : "text-white/80 hover:text-white"
                 }`}
               >
                 {link.label}
                 {location.pathname === link.path && (
-                  <span className="absolute -bottom-2 left-0 w-full h-0.5 bg-primary rounded-full" />
+                  <span className="absolute -bottom-2 left-0 w-full h-0.5 bg-white rounded-full" />
                 )}
               </Link>
             ))}
-            <Link to="/contact">
-              <Button 
-                variant="default" 
-                className="bg-primary hover:bg-primary/90 text-primary-foreground rounded-full px-6 font-medium"
-              >
-                Contact
-              </Button>
-            </Link>
           </div>
 
           {/* Mobile Menu Button */}
@@ -91,21 +83,13 @@ const Navigation = () => {
                   onClick={() => setIsMobileMenuOpen(false)}
                   className={`text-lg font-medium tracking-tight transition-colors duration-200 ${
                     location.pathname === link.path
-                      ? "text-foreground"
-                      : "text-muted-foreground"
+                      ? "text-white"
+                      : "text-white/80"
                   }`}
                 >
                   {link.label}
                 </Link>
               ))}
-              <Link to="/contact" onClick={() => setIsMobileMenuOpen(false)}>
-                <Button 
-                  variant="default" 
-                  className="w-full bg-primary hover:bg-primary/90 text-primary-foreground rounded-full font-medium"
-                >
-                  Contact
-                </Button>
-              </Link>
             </div>
           </div>
         )}

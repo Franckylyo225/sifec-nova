@@ -2,7 +2,7 @@ import { useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { ArrowRight, Target, Users, Lightbulb, Shield, Sparkles, TrendingUp } from "lucide-react";
+import { ArrowRight, Target, Users, Lightbulb, Shield, Sparkles, TrendingUp, ArrowUpRight } from "lucide-react";
 import heroImage from "@/assets/hero-bg.jpg";
 
 const Home = () => {
@@ -53,6 +53,57 @@ const Home = () => {
     },
   ];
 
+  const clients = [
+    { name: "Client 1", abbr: "C1" },
+    { name: "Client 2", abbr: "C2" },
+    { name: "Client 3", abbr: "C3" },
+    { name: "Client 4", abbr: "C4" },
+    { name: "Client 5", abbr: "C5" },
+    { name: "Client 6", abbr: "C6" },
+  ];
+
+  const projects = [
+    {
+      title: "Campagne présidentielle 2024",
+      category: "Politique",
+      description: "Stratégie de communication complète pour un candidat majeur",
+      image: "linear-gradient(135deg, hsl(215 85% 20%), hsl(215 70% 35%))",
+    },
+    {
+      title: "Lancement produit tech",
+      category: "Corporate",
+      description: "Gestion de l'événement et relations presse internationales",
+      image: "linear-gradient(135deg, hsl(0 75% 45%), hsl(0 85% 55%))",
+    },
+    {
+      title: "Gestion de crise institutionnelle",
+      category: "Crise",
+      description: "Accompagnement stratégique et média training d'urgence",
+      image: "linear-gradient(135deg, hsl(220 40% 8%), hsl(215 50% 15%))",
+    },
+  ];
+
+  const insights = [
+    {
+      category: "Tendances",
+      title: "L'IA transforme la communication politique",
+      date: "15 Nov 2025",
+      readTime: "5 min",
+    },
+    {
+      category: "Analyse",
+      title: "Nouvelles stratégies de gestion de crise",
+      date: "10 Nov 2025",
+      readTime: "7 min",
+    },
+    {
+      category: "Guide",
+      title: "Optimiser sa présence sur les réseaux sociaux",
+      date: "05 Nov 2025",
+      readTime: "4 min",
+    },
+  ];
+
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
@@ -79,23 +130,23 @@ const Home = () => {
         />
 
         {/* Hero Content */}
-        <div className="container mx-auto px-6 text-center z-10">
-          <h1 className="text-5xl md:text-7xl lg:text-8xl font-serif font-bold mb-6 animate-fade-in-up text-primary-foreground">
+        <div className="container mx-auto px-8 text-center z-10">
+          <h1 className="text-6xl md:text-8xl lg:text-9xl font-display font-bold mb-8 animate-fade-in-up text-primary-foreground tracking-tight">
             Intelligence
-            <span className="block text-gradient-accent mt-2">Communicationnelle</span>
+            <span className="block text-gradient-accent mt-4">Communicationnelle</span>
           </h1>
-          <p className="text-xl md:text-2xl mb-10 max-w-3xl mx-auto animate-fade-in-up text-primary-foreground/90" style={{ animationDelay: "0.2s" }}>
+          <p className="text-xl md:text-2xl mb-12 max-w-3xl mx-auto animate-fade-in-up text-primary-foreground/90 font-light" style={{ animationDelay: "0.2s" }}>
             Agence de communication premium dédiée aux clients institutionnels et personnalités publiques
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center animate-fade-in-up" style={{ animationDelay: "0.4s" }}>
+          <div className="flex flex-col sm:flex-row gap-6 justify-center animate-fade-in-up" style={{ animationDelay: "0.4s" }}>
             <Link to="/contact">
-              <Button size="lg" className="bg-accent hover:bg-accent-light text-accent-foreground text-lg px-8">
+              <Button size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground text-base px-10 py-7 rounded-full font-medium">
                 Découvrir nos services
                 <ArrowRight className="ml-2" size={20} />
               </Button>
             </Link>
             <Link to="/portfolio">
-              <Button size="lg" variant="outline" className="border-2 border-primary-foreground text-primary-foreground hover:bg-primary-foreground/10 text-lg px-8">
+              <Button size="lg" variant="outline" className="border-2 border-primary-foreground/30 bg-primary-foreground/5 backdrop-blur-sm text-primary-foreground hover:bg-primary-foreground/10 text-base px-10 py-7 rounded-full font-medium">
                 Nos réalisations
               </Button>
             </Link>
@@ -103,42 +154,184 @@ const Home = () => {
         </div>
 
         {/* Scroll Indicator */}
-        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
-          <div className="w-6 h-10 border-2 border-primary-foreground rounded-full flex items-start justify-center p-2">
+        <div className="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 animate-bounce">
+          <span className="text-primary-foreground/60 text-sm font-medium tracking-wide">Scroll</span>
+          <div className="w-1 h-8 bg-primary-foreground/30 rounded-full relative overflow-hidden">
             <div className="w-1 h-2 bg-primary-foreground rounded-full animate-pulse" />
           </div>
         </div>
       </section>
 
-      {/* Services Section */}
-      <section className="py-24 bg-background">
-        <div className="container mx-auto px-6">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-serif font-bold mb-4">
+      {/* Services Section avec effets Samsung */}
+      <section className="py-32 bg-background">
+        <div className="container mx-auto px-8">
+          <div className="text-center mb-20">
+            <h2 className="text-5xl md:text-6xl font-display font-bold mb-6 tracking-tight">
               Notre <span className="text-gradient-accent">Expertise</span>
             </h2>
-            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+            <p className="text-xl text-muted-foreground max-w-2xl mx-auto font-light">
               Des solutions sur mesure pour répondre aux enjeux de communication les plus complexes
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {services.map((service, index) => (
               <Card
                 key={index}
-                className="hover-lift border-border bg-card group cursor-pointer"
-                style={{ animationDelay: `${index * 0.1}s` }}
+                className="group relative border-border/50 bg-card hover:bg-card/80 transition-all duration-500 overflow-hidden cursor-pointer rounded-3xl"
+                style={{ 
+                  animationDelay: `${index * 0.1}s`,
+                  boxShadow: "0 4px 24px rgba(0, 0, 0, 0.06)",
+                }}
               >
-                <CardContent className="p-8">
-                  <div className="mb-4 w-14 h-14 bg-gradient-to-br from-primary to-primary-light rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                    <service.icon className="text-primary-foreground" size={28} />
+                <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-accent/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                
+                <CardContent className="p-10 relative z-10">
+                  <div className="mb-6 w-16 h-16 bg-gradient-to-br from-primary/10 to-primary/5 rounded-2xl flex items-center justify-center group-hover:scale-110 group-hover:rotate-3 transition-all duration-500">
+                    <service.icon className="text-primary" size={28} strokeWidth={1.5} />
                   </div>
-                  <h3 className="text-xl font-serif font-semibold mb-3 group-hover:text-primary transition-colors">
+                  <h3 className="text-2xl font-display font-bold mb-4 group-hover:text-primary transition-colors duration-300 tracking-tight">
                     {service.title}
                   </h3>
-                  <p className="text-muted-foreground">
+                  <p className="text-muted-foreground leading-relaxed font-light">
                     {service.description}
                   </p>
+                  <div className="mt-6 flex items-center text-primary opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <span className="text-sm font-medium">En savoir plus</span>
+                    <ArrowUpRight size={16} className="ml-1" />
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Références clients */}
+      <section className="py-24 bg-muted/30">
+        <div className="container mx-auto px-8">
+          <div className="text-center mb-16">
+            <p className="text-sm font-medium text-muted-foreground uppercase tracking-wider mb-4">Ils nous font confiance</p>
+            <h2 className="text-4xl md:text-5xl font-display font-bold tracking-tight">
+              Nos Références
+            </h2>
+          </div>
+
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8">
+            {clients.map((client, index) => (
+              <div
+                key={index}
+                className="flex items-center justify-center p-8 bg-background rounded-2xl hover:shadow-lg transition-all duration-300 cursor-pointer group"
+              >
+                <div className="text-4xl font-display font-bold text-muted-foreground/30 group-hover:text-primary/60 transition-colors duration-300">
+                  {client.abbr}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Notre travail */}
+      <section className="py-32 bg-background">
+        <div className="container mx-auto px-8">
+          <div className="flex justify-between items-end mb-16">
+            <div>
+              <h2 className="text-5xl md:text-6xl font-display font-bold mb-4 tracking-tight">
+                Notre Travail
+              </h2>
+              <p className="text-xl text-muted-foreground font-light">
+                Découvrez nos projets récents et leur impact
+              </p>
+            </div>
+            <Link to="/portfolio">
+              <Button variant="ghost" className="group rounded-full">
+                Voir tout
+                <ArrowUpRight className="ml-2 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" size={18} />
+              </Button>
+            </Link>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            {projects.map((project, index) => (
+              <div
+                key={index}
+                className="group relative overflow-hidden rounded-3xl cursor-pointer"
+                style={{
+                  aspectRatio: "4/5",
+                  background: project.image,
+                }}
+              >
+                <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/80 group-hover:to-black/90 transition-all duration-500" />
+                
+                <div className="absolute inset-0 p-8 flex flex-col justify-end">
+                  <span className="text-primary-foreground/70 text-sm font-medium mb-2 tracking-wide">
+                    {project.category}
+                  </span>
+                  <h3 className="text-2xl font-display font-bold text-primary-foreground mb-3 tracking-tight">
+                    {project.title}
+                  </h3>
+                  <p className="text-primary-foreground/80 mb-4 font-light">
+                    {project.description}
+                  </p>
+                  <div className="flex items-center text-primary-foreground opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <span className="text-sm font-medium">Voir le projet</span>
+                    <ArrowUpRight size={16} className="ml-1" />
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* News & Insights */}
+      <section className="py-32 bg-muted/30">
+        <div className="container mx-auto px-8">
+          <div className="flex justify-between items-end mb-16">
+            <div>
+              <h2 className="text-5xl md:text-6xl font-display font-bold mb-4 tracking-tight">
+                News & Insights
+              </h2>
+              <p className="text-xl text-muted-foreground font-light">
+                Nos dernières analyses et perspectives
+              </p>
+            </div>
+            <Link to="/blog">
+              <Button variant="ghost" className="group rounded-full">
+                Voir tous les articles
+                <ArrowUpRight className="ml-2 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" size={18} />
+              </Button>
+            </Link>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {insights.map((insight, index) => (
+              <Card
+                key={index}
+                className="group border-border/50 bg-background hover:shadow-xl transition-all duration-500 cursor-pointer rounded-3xl overflow-hidden"
+              >
+                <CardContent className="p-8">
+                  <div className="flex items-center gap-3 mb-6">
+                    <span className="text-xs font-medium text-primary bg-primary/10 px-3 py-1 rounded-full">
+                      {insight.category}
+                    </span>
+                    <span className="text-xs text-muted-foreground">
+                      {insight.readTime} lecture
+                    </span>
+                  </div>
+                  
+                  <h3 className="text-xl font-display font-bold mb-4 group-hover:text-primary transition-colors duration-300 tracking-tight leading-tight">
+                    {insight.title}
+                  </h3>
+                  
+                  <div className="flex items-center justify-between mt-6">
+                    <span className="text-sm text-muted-foreground">{insight.date}</span>
+                    <div className="flex items-center text-primary opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                      <span className="text-sm font-medium">Lire</span>
+                      <ArrowUpRight size={16} className="ml-1" />
+                    </div>
+                  </div>
                 </CardContent>
               </Card>
             ))}
@@ -147,20 +340,20 @@ const Home = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="py-24 bg-gradient-to-br from-primary to-primary-light text-primary-foreground relative overflow-hidden">
+      <section className="py-32 bg-gradient-to-br from-primary to-primary-light text-primary-foreground relative overflow-hidden">
         <div className="absolute inset-0 opacity-10">
           <div className="absolute inset-0" style={{ backgroundImage: "radial-gradient(circle at 2px 2px, white 1px, transparent 0)", backgroundSize: "40px 40px" }} />
         </div>
         
-        <div className="container mx-auto px-6 text-center relative z-10">
-          <h2 className="text-4xl md:text-5xl font-serif font-bold mb-6">
+        <div className="container mx-auto px-8 text-center relative z-10">
+          <h2 className="text-5xl md:text-6xl font-display font-bold mb-8 tracking-tight">
             Prêt à transformer votre communication ?
           </h2>
-          <p className="text-xl mb-10 max-w-2xl mx-auto text-primary-foreground/90">
+          <p className="text-xl mb-12 max-w-2xl mx-auto text-primary-foreground/90 font-light">
             Discutons de vos objectifs et construisons ensemble une stratégie gagnante
           </p>
           <Link to="/contact">
-            <Button size="lg" variant="outline" className="border-2 border-primary-foreground text-primary-foreground hover:bg-primary-foreground hover:text-primary text-lg px-8">
+            <Button size="lg" variant="outline" className="border-2 border-primary-foreground/30 bg-primary-foreground/10 backdrop-blur-sm text-primary-foreground hover:bg-primary-foreground hover:text-primary text-base px-10 py-7 rounded-full font-medium">
               Prendre contact
               <ArrowRight className="ml-2" size={20} />
             </Button>

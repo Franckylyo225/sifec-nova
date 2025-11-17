@@ -133,7 +133,7 @@ const Home = () => {
         {/* Hero Content */}
         <div className="container mx-auto px-8 text-center z-10">
           <h1 className="text-5xl md:text-7xl lg:text-8xl font-display font-bold mb-8 animate-fade-in-up text-primary-foreground tracking-tight leading-tight">
-            SIFEC — L'expertise qui donne du pouvoir à votre image.
+            <span className="text-gradient-accent">SIFEC</span> — L'expertise qui donne du <span className="text-accent">pouvoir à votre image</span>.
           </h1>
           <p className="text-xl md:text-2xl mb-12 max-w-3xl mx-auto animate-fade-in-up text-primary-foreground/90 font-light" style={{ animationDelay: "0.2s" }}>
             Votre partenaire stratégique pour une communication institutionnelle forte, cohérente et performante.

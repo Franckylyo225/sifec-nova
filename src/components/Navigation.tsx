@@ -48,16 +48,25 @@ const Navigation = () => {
               <Link
                 key={link.path}
                 to={link.path}
-                className={`text-[15px] font-medium tracking-tight transition-colors duration-200 relative ${
-                  location.pathname === link.path
+                className={`text-[15px] font-medium tracking-tight transition-all duration-300 relative group ${
+                  isScrolled
+                    ? location.pathname === link.path
+                      ? "text-primary"
+                      : "text-foreground hover:text-primary hover:scale-105"
+                    : location.pathname === link.path
                     ? "text-white"
-                    : "text-white/80 hover:text-white"
+                    : "text-white/80 hover:text-white hover:scale-105"
                 }`}
               >
                 {link.label}
                 {location.pathname === link.path && (
-                  <span className="absolute -bottom-2 left-0 w-full h-0.5 bg-white rounded-full" />
+                  <span className={`absolute -bottom-2 left-0 w-full h-0.5 rounded-full transition-colors duration-300 ${
+                    isScrolled ? "bg-primary" : "bg-white"
+                  }`} />
                 )}
+                <span className={`absolute -bottom-2 left-0 w-0 h-0.5 rounded-full transition-all duration-300 group-hover:w-full ${
+                  isScrolled ? "bg-primary" : "bg-white"
+                }`} />
               </Link>
             ))}
           </div>
@@ -81,10 +90,14 @@ const Navigation = () => {
                   key={link.path}
                   to={link.path}
                   onClick={() => setIsMobileMenuOpen(false)}
-                  className={`text-lg font-medium tracking-tight transition-colors duration-200 ${
-                    location.pathname === link.path
+                  className={`text-lg font-medium tracking-tight transition-all duration-300 hover:scale-105 hover:translate-x-2 ${
+                    isScrolled
+                      ? location.pathname === link.path
+                        ? "text-primary"
+                        : "text-foreground hover:text-primary"
+                      : location.pathname === link.path
                       ? "text-white"
-                      : "text-white/80"
+                      : "text-white/80 hover:text-white"
                   }`}
                 >
                   {link.label}

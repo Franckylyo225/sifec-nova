@@ -6,6 +6,7 @@ const Navigation = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const location = useLocation();
+  const isHomePage = location.pathname === "/";
 
   useEffect(() => {
     const handleScroll = () => {
@@ -27,7 +28,7 @@ const Navigation = () => {
   return (
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled
+        isScrolled || !isHomePage
           ? "bg-background/80 backdrop-blur-xl border-b border-border/50"
           : "bg-transparent"
       }`}
@@ -49,7 +50,7 @@ const Navigation = () => {
                 key={link.path}
                 to={link.path}
                 className={`text-[15px] font-medium tracking-tight transition-all duration-300 relative group ${
-                  isScrolled
+                  isScrolled || !isHomePage
                     ? location.pathname === link.path
                       ? "text-primary"
                       : "text-foreground hover:text-primary hover:scale-105"
@@ -61,11 +62,11 @@ const Navigation = () => {
                 {link.label}
                 {location.pathname === link.path && (
                   <span className={`absolute -bottom-2 left-0 w-full h-0.5 rounded-full transition-colors duration-300 ${
-                    isScrolled ? "bg-primary" : "bg-white"
+                    isScrolled || !isHomePage ? "bg-primary" : "bg-white"
                   }`} />
                 )}
                 <span className={`absolute -bottom-2 left-0 w-0 h-0.5 rounded-full transition-all duration-300 group-hover:w-full ${
-                  isScrolled ? "bg-primary" : "bg-white"
+                  isScrolled || !isHomePage ? "bg-primary" : "bg-white"
                 }`} />
               </Link>
             ))}
@@ -91,7 +92,7 @@ const Navigation = () => {
                   to={link.path}
                   onClick={() => setIsMobileMenuOpen(false)}
                   className={`text-lg font-medium tracking-tight transition-all duration-300 hover:scale-105 hover:translate-x-2 ${
-                    isScrolled
+                    isScrolled || !isHomePage
                       ? location.pathname === link.path
                         ? "text-primary"
                         : "text-foreground hover:text-primary"

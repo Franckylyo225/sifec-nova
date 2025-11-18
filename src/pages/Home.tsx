@@ -5,6 +5,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { ArrowRight, Target, Users, Lightbulb, Shield, Sparkles, TrendingUp, ArrowUpRight, Award, Briefcase, TrendingUp as TrendingUpIcon, Star } from "lucide-react";
 import heroImage from "@/assets/hero-bg.jpg";
 import { useCountUp } from "@/hooks/useCountUp";
+import VideoCarousel from "@/components/VideoCarousel";
 
 const Home = () => {
   const parallaxRef = useRef<HTMLDivElement>(null);
@@ -259,6 +260,22 @@ const Home = () => {
               </div>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* Nos dernières réalisations vidéo */}
+      <section className="py-32 bg-muted/30">
+        <div className="container mx-auto px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-5xl md:text-6xl font-display font-bold mb-4 tracking-tight">
+              Nos Dernières Réalisations
+            </h2>
+            <p className="text-xl text-muted-foreground font-light">
+              Découvrez nos projets vidéo récents
+            </p>
+          </div>
+
+          <VideoCarousel />
         </div>
       </section>
 

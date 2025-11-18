@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Menu, X } from "lucide-react";
+import logoWhite from "@/assets/logo-sifec-white.png";
+import logoBlue from "@/assets/logo-sifec-blue.png";
 
 const Navigation = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -36,11 +38,12 @@ const Navigation = () => {
       <div className="container mx-auto px-8 py-6">
         <div className="flex items-center justify-between">
           {/* Logo */}
-          <Link to="/" className="flex items-center space-x-2 group">
-            <div className="text-2xl font-display font-bold tracking-tight">
-              <span className="text-primary">SI</span>
-              <span className="text-accent">FEC</span>
-            </div>
+          <Link to="/" className="flex items-center group">
+            <img 
+              src={isScrolled || !isHomePage ? logoBlue : logoWhite} 
+              alt="SIFEC" 
+              className="h-12 w-auto transition-all duration-300"
+            />
           </Link>
 
           {/* Desktop Navigation */}

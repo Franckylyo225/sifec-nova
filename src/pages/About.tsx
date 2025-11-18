@@ -1,5 +1,6 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Award, Heart, Globe, Zap } from "lucide-react";
+import aboutHeroImage from "@/assets/about-hero.jpg";
 
 const About = () => {
   const values = [
@@ -28,13 +29,18 @@ const About = () => {
   return (
     <div className="min-h-screen pt-24">
       {/* Hero Section */}
-      <section className="py-20 bg-gradient-to-br from-primary to-primary-light text-primary-foreground">
-        <div className="container mx-auto px-6">
+      <section className="relative py-32 overflow-hidden">
+        <div 
+          className="absolute inset-0 bg-cover bg-center"
+          style={{ backgroundImage: `url(${aboutHeroImage})` }}
+        />
+        <div className="absolute inset-0 bg-gradient-to-br from-primary/90 to-primary-light/80" />
+        <div className="container mx-auto px-6 relative z-10">
           <div className="max-w-4xl mx-auto text-center">
-            <h1 className="text-5xl md:text-6xl font-serif font-bold mb-6 animate-fade-in-up">
+            <h1 className="text-5xl md:text-7xl font-serif font-bold mb-6 animate-fade-in-up text-primary-foreground">
               À propos de <span className="text-accent">SIFEC</span>
             </h1>
-            <p className="text-xl text-primary-foreground/90 animate-fade-in-up" style={{ animationDelay: "0.2s" }}>
+            <p className="text-xl md:text-2xl text-primary-foreground/90 animate-fade-in-up" style={{ animationDelay: "0.2s" }}>
               Experts en intelligence communicationnelle depuis plus de 15 ans
             </p>
           </div>
@@ -45,7 +51,7 @@ const About = () => {
       <section className="py-24 bg-background">
         <div className="container mx-auto px-6">
           <div className="max-w-4xl mx-auto">
-            <h2 className="text-4xl font-serif font-bold mb-8 text-center">
+            <h2 className="text-4xl md:text-5xl font-serif font-bold mb-8 text-center">
               Notre <span className="text-gradient-accent">Histoire</span>
             </h2>
             <div className="space-y-6 text-lg text-muted-foreground leading-relaxed">
@@ -67,7 +73,7 @@ const About = () => {
       <section className="py-24 bg-secondary">
         <div className="container mx-auto px-6">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-serif font-bold mb-4">
+            <h2 className="text-4xl md:text-5xl font-serif font-bold mb-4">
               Nos <span className="text-gradient-accent">Valeurs</span>
             </h2>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
@@ -103,7 +109,7 @@ const About = () => {
       <section className="py-24 bg-background">
         <div className="container mx-auto px-6">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-serif font-bold mb-4">
+            <h2 className="text-4xl md:text-5xl font-serif font-bold mb-4">
               Notre <span className="text-gradient-accent">Équipe</span>
             </h2>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">

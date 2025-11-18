@@ -13,6 +13,7 @@ import {
   Megaphone,
   ArrowRight,
 } from "lucide-react";
+import expertiseHeroImage from "@/assets/expertise-hero.jpg";
 
 const Expertise = () => {
   const expertiseAreas = [
@@ -87,13 +88,18 @@ const Expertise = () => {
   return (
     <div className="min-h-screen pt-24">
       {/* Hero Section */}
-      <section className="py-20 bg-gradient-to-br from-primary to-primary-light text-primary-foreground">
-        <div className="container mx-auto px-6">
+      <section className="relative py-32 overflow-hidden">
+        <div 
+          className="absolute inset-0 bg-cover bg-center"
+          style={{ backgroundImage: `url(${expertiseHeroImage})` }}
+        />
+        <div className="absolute inset-0 bg-gradient-to-br from-primary/90 to-primary-light/80" />
+        <div className="container mx-auto px-6 relative z-10">
           <div className="max-w-4xl mx-auto text-center">
-            <h1 className="text-5xl md:text-6xl font-serif font-bold mb-6 animate-fade-in-up">
+            <h1 className="text-5xl md:text-7xl font-serif font-bold mb-6 animate-fade-in-up text-primary-foreground">
               Notre <span className="text-accent">Expertise</span>
             </h1>
-            <p className="text-xl text-primary-foreground/90 animate-fade-in-up" style={{ animationDelay: "0.2s" }}>
+            <p className="text-xl md:text-2xl text-primary-foreground/90 animate-fade-in-up" style={{ animationDelay: "0.2s" }}>
               Des compétences pointues pour répondre à tous vos besoins en communication
             </p>
           </div>

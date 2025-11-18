@@ -5,6 +5,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Mail, Phone, MapPin, Send } from "lucide-react";
 import { useState } from "react";
 import { useToast } from "@/hooks/use-toast";
+import contactHeroImage from "@/assets/contact-hero.jpg";
 
 const Contact = () => {
   const { toast } = useToast();
@@ -32,16 +33,18 @@ const Contact = () => {
   return (
     <div className="min-h-screen pt-24">
       {/* Hero Section */}
-      <section className="py-32 bg-gradient-to-br from-primary via-primary to-primary-light text-primary-foreground relative overflow-hidden">
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute inset-0" style={{ backgroundImage: "radial-gradient(circle at 2px 2px, white 1px, transparent 0)", backgroundSize: "40px 40px" }} />
-        </div>
-        <div className="container mx-auto px-8 relative z-10">
+      <section className="relative py-32 overflow-hidden">
+        <div 
+          className="absolute inset-0 bg-cover bg-center"
+          style={{ backgroundImage: `url(${contactHeroImage})` }}
+        />
+        <div className="absolute inset-0 bg-gradient-to-br from-primary/90 to-primary-light/80" />
+        <div className="container mx-auto px-6 relative z-10">
           <div className="max-w-4xl mx-auto text-center">
-            <h1 className="text-6xl md:text-8xl font-display font-bold mb-8 animate-fade-in-up tracking-tight">
+            <h1 className="text-5xl md:text-7xl font-serif font-bold mb-6 animate-fade-in-up text-primary-foreground">
               Contactez-<span className="text-accent">nous</span>
             </h1>
-            <p className="text-2xl text-primary-foreground/90 animate-fade-in-up font-light" style={{ animationDelay: "0.2s" }}>
+            <p className="text-xl md:text-2xl text-primary-foreground/90 animate-fade-in-up" style={{ animationDelay: "0.2s" }}>
               Discutons de votre projet et de vos ambitions
             </p>
           </div>
@@ -55,7 +58,7 @@ const Contact = () => {
             {/* Contact Info */}
             <div className="space-y-8">
               <div>
-                <h2 className="text-4xl font-display font-bold mb-6 tracking-tight">
+                <h2 className="text-4xl md:text-5xl font-serif font-bold mb-6">
                   Nos <span className="text-gradient-accent">coordonnées</span>
                 </h2>
                 <p className="text-muted-foreground leading-relaxed font-light">

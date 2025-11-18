@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { Mail, Phone, MapPin, Linkedin, Twitter, Instagram } from "lucide-react";
+import logoWhite from "@/assets/logo-sifec-white.png";
 
 const Footer = () => {
   return (
@@ -8,10 +9,13 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
           {/* Brand */}
           <div className="space-y-4">
-            <div className="text-3xl font-serif font-bold">
-              <span className="text-primary-foreground">SI</span>
-              <span className="text-accent">FEC</span>
-            </div>
+            <Link to="/" className="inline-block">
+              <img 
+                src={logoWhite} 
+                alt="SIFEC" 
+                className="h-16 w-auto hover:opacity-80 transition-opacity"
+              />
+            </Link>
             <p className="text-sm text-primary-foreground/80">
               Intelligence communicationnelle pour clients institutionnels et personnalités publiques.
             </p>

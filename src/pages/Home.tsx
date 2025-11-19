@@ -6,6 +6,9 @@ import { ArrowRight, Target, Users, Lightbulb, Shield, Sparkles, TrendingUp, Arr
 import heroImage from "@/assets/hero-bg.jpg";
 import { useCountUp } from "@/hooks/useCountUp";
 import VideoCarousel from "@/components/VideoCarousel";
+import ministereCultureImg from "@/assets/portfolio/ministere-culture-main.jpg";
+import ceoFortuneImg from "@/assets/portfolio/ceo-fortune500-main.jpg";
+import groupeCac40Img from "@/assets/portfolio/groupe-cac40-main.jpg";
 
 const Home = () => {
   const parallaxRef = useRef<HTMLDivElement>(null);
@@ -66,22 +69,22 @@ const Home = () => {
 
   const projects = [
     {
-      title: "Campagne présidentielle 2024",
-      category: "Politique",
-      description: "Stratégie de communication complète pour un candidat majeur",
-      image: "linear-gradient(135deg, hsl(215 85% 20%), hsl(215 70% 35%))",
+      title: "Ministère de la Culture",
+      category: "Institutionnel",
+      description: "Stratégie de communication pour le lancement d'une nouvelle politique culturelle nationale",
+      image: ministereCultureImg,
     },
     {
-      title: "Lancement produit tech",
+      title: "PDG Fortune 500",
+      category: "Personnalité publique",
+      description: "Personal branding et gestion de crise pour un dirigeant multinational",
+      image: ceoFortuneImg,
+    },
+    {
+      title: "Groupe CAC 40",
       category: "Corporate",
-      description: "Gestion de l'événement et relations presse internationales",
-      image: "linear-gradient(135deg, hsl(0 75% 45%), hsl(0 85% 55%))",
-    },
-    {
-      title: "Gestion de crise institutionnelle",
-      category: "Crise",
-      description: "Accompagnement stratégique et média training d'urgence",
-      image: "linear-gradient(135deg, hsl(220 40% 8%), hsl(215 50% 15%))",
+      description: "Accompagnement communication lors d'une fusion-acquisition majeure",
+      image: groupeCac40Img,
     },
   ];
 
@@ -235,7 +238,9 @@ const Home = () => {
                 className="group relative overflow-hidden rounded-3xl cursor-pointer"
                 style={{
                   aspectRatio: "4/5",
-                  background: project.image,
+                  backgroundImage: `url(${project.image})`,
+                  backgroundSize: "cover",
+                  backgroundPosition: "center",
                 }}
               >
                 <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/80 group-hover:to-black/90 transition-all duration-500" />

@@ -4,6 +4,18 @@ import { Building2, User, Briefcase, ArrowUpRight, Calendar, X } from "lucide-re
 import portfolioHeroImage from "@/assets/portfolio-hero.jpg";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { useState } from "react";
+import ministereCultureMain from "@/assets/portfolio/ministere-culture-main.jpg";
+import ministereCultureSecondary from "@/assets/portfolio/ministere-culture-secondary.jpg";
+import ceoFortuneMain from "@/assets/portfolio/ceo-fortune500-main.jpg";
+import ceoFortuneSecondary from "@/assets/portfolio/ceo-fortune500-secondary.jpg";
+import groupeCac40Main from "@/assets/portfolio/groupe-cac40-main.jpg";
+import groupeCac40Secondary from "@/assets/portfolio/groupe-cac40-secondary.jpg";
+import organisationInterMain from "@/assets/portfolio/organisation-internationale-main.jpg";
+import organisationInterSecondary from "@/assets/portfolio/organisation-internationale-secondary.jpg";
+import ministreExerciceMain from "@/assets/portfolio/ministre-exercice-main.jpg";
+import ministreExerciceSecondary from "@/assets/portfolio/ministre-exercice-secondary.jpg";
+import scaleupTechMain from "@/assets/portfolio/scaleup-tech-main.jpg";
+import scaleupTechSecondary from "@/assets/portfolio/scaleup-tech-secondary.jpg";
 
 const Portfolio = () => {
   const [selectedProject, setSelectedProject] = useState<number | null>(null);
@@ -19,11 +31,11 @@ const Portfolio = () => {
       results: "+150% de visibilité médiatique",
       client: "Ministère de la Culture",
       date: "Janvier 2024",
-      image: "linear-gradient(135deg, hsl(215 85% 20%), hsl(215 70% 35%))",
+      image: ministereCultureMain,
       detailedDescription: "Accompagnement stratégique complet pour le lancement d'une nouvelle politique culturelle nationale. Déploiement d'une campagne multicanale incluant relations presse, digital et événementiel. Création d'une narrative forte et mobilisatrice auprès des acteurs culturels et du grand public.",
       images: [
-        "linear-gradient(135deg, hsl(215 85% 20%), hsl(215 70% 35%))",
-        "linear-gradient(135deg, hsl(215 70% 35%), hsl(215 85% 50%))",
+        ministereCultureMain,
+        ministereCultureSecondary,
       ],
     },
     {
@@ -36,11 +48,11 @@ const Portfolio = () => {
       results: "Réputation restaurée en 3 mois",
       client: "Groupe multinational",
       date: "Mars 2024",
-      image: "linear-gradient(135deg, hsl(0 75% 45%), hsl(0 85% 55%))",
+      image: ceoFortuneMain,
       detailedDescription: "Gestion de crise et reconstruction d'image pour un PDG de groupe Fortune 500. Media training intensif, stratégie de prise de parole et repositionnement stratégique. Accompagnement quotidien pendant 3 mois avec résultats mesurables et durables.",
       images: [
-        "linear-gradient(135deg, hsl(0 75% 45%), hsl(0 85% 55%))",
-        "linear-gradient(135deg, hsl(0 85% 55%), hsl(0 75% 65%))",
+        ceoFortuneMain,
+        ceoFortuneSecondary,
       ],
     },
     {
@@ -53,11 +65,11 @@ const Portfolio = () => {
       results: "Opération menée sans incident",
       client: "Groupe CAC 40",
       date: "Juin 2024",
-      image: "linear-gradient(135deg, hsl(220 40% 8%), hsl(215 50% 15%))",
+      image: groupeCac40Main,
       detailedDescription: "Stratégie de communication globale pour accompagner une fusion-acquisition majeure. Gestion des communications internes et externes, relations investisseurs, et conduite du changement. Coordination de tous les stakeholders avec succès.",
       images: [
-        "linear-gradient(135deg, hsl(220 40% 8%), hsl(215 50% 15%))",
-        "linear-gradient(135deg, hsl(215 50% 15%), hsl(215 60% 25%))",
+        groupeCac40Main,
+        groupeCac40Secondary,
       ],
     },
     {
@@ -70,11 +82,11 @@ const Portfolio = () => {
       results: "20M+ de personnes touchées",
       client: "Organisation internationale",
       date: "Septembre 2024",
-      image: "linear-gradient(135deg, hsl(140 60% 30%), hsl(140 70% 45%))",
+      image: organisationInterMain,
       detailedDescription: "Campagne de communication mondiale pour une initiative environnementale majeure. Stratégie multi-pays, coordination avec les médias internationaux, création de contenus impactants. Résultats dépassant les objectifs initiaux avec plus de 20 millions de personnes touchées.",
       images: [
-        "linear-gradient(135deg, hsl(140 60% 30%), hsl(140 70% 45%))",
-        "linear-gradient(135deg, hsl(140 70% 45%), hsl(140 60% 55%))",
+        organisationInterMain,
+        organisationInterSecondary,
       ],
     },
     {
@@ -87,11 +99,11 @@ const Portfolio = () => {
       results: "95% d'opinions positives",
       client: "Ministère",
       date: "Octobre 2024",
-      image: "linear-gradient(135deg, hsl(260 60% 40%), hsl(260 70% 55%))",
+      image: ministreExerciceMain,
       detailedDescription: "Accompagnement stratégique et media training d'un ministre en exercice. Préparation aux interviews, gestion de la communication de crise, et optimisation de la prise de parole publique. Suivi quotidien de l'opinion et adaptation des messages en temps réel.",
       images: [
-        "linear-gradient(135deg, hsl(260 60% 40%), hsl(260 70% 55%))",
-        "linear-gradient(135deg, hsl(260 70% 55%), hsl(260 60% 65%))",
+        ministreExerciceMain,
+        ministreExerciceSecondary,
       ],
     },
     {
@@ -104,11 +116,11 @@ const Portfolio = () => {
       results: "Top 3 des scale-ups visibles",
       client: "Scale-up technologique",
       date: "Novembre 2024",
-      image: "linear-gradient(135deg, hsl(280 70% 45%), hsl(280 80% 60%))",
+      image: scaleupTechMain,
       detailedDescription: "Stratégie de positionnement et d'influence pour une licorne technologique française. Développement du thought leadership, relations médias stratégiques, et organisation d'événements majeurs. Positionnement réussi dans le top 3 des scale-ups les plus visibles de l'écosystème.",
       images: [
-        "linear-gradient(135deg, hsl(280 70% 45%), hsl(280 80% 60%))",
-        "linear-gradient(135deg, hsl(280 80% 60%), hsl(280 70% 70%))",
+        scaleupTechMain,
+        scaleupTechSecondary,
       ],
     },
   ];
@@ -175,7 +187,9 @@ const Portfolio = () => {
                 className="group relative overflow-hidden rounded-3xl cursor-pointer"
                 style={{
                   aspectRatio: "4/5",
-                  background: project.image,
+                  backgroundImage: `url(${project.image})`,
+                  backgroundSize: "cover",
+                  backgroundPosition: "center",
                 }}
               >
                 <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/80 group-hover:to-black/90 transition-all duration-500" />
@@ -232,7 +246,11 @@ const Portfolio = () => {
                     <div
                       key={idx}
                       className="aspect-video rounded-xl overflow-hidden"
-                      style={{ background: image }}
+                      style={{ 
+                        backgroundImage: `url(${image})`,
+                        backgroundSize: "cover",
+                        backgroundPosition: "center",
+                      }}
                     />
                   ))}
                 </div>

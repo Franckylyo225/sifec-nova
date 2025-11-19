@@ -24,19 +24,19 @@ const VideoCarousel = () => {
       id: 1,
       title: "Campagne Institutionnelle 2024",
       category: "Communication Corporate",
-      videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+      videoUrl: "https://www.youtube.com/embed/bxUSJLIyvKg",
     },
     {
       id: 2,
       title: "Spot TV - Lancement Produit",
       category: "Publicité",
-      videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+      videoUrl: "https://www.youtube.com/embed/bxUSJLIyvKg",
     },
     {
       id: 3,
       title: "Interview Leadership",
       category: "Relations Publiques",
-      videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+      videoUrl: "https://www.youtube.com/embed/bxUSJLIyvKg",
     },
   ];
 

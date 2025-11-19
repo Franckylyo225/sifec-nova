@@ -412,19 +412,19 @@ const StatsGrid = () => {
   const stats = [
     {
       icon: Award,
-      end: 15,
+      end: 4,
       suffix: "+",
       label: "Années d'expérience",
     },
     {
       icon: Users,
-      end: 200,
+      end: 15,
       suffix: "+",
       label: "Clients accompagnés",
     },
     {
       icon: Briefcase,
-      end: 500,
+      end: 70,
       suffix: "+",
       label: "Projets réalisés",
     },

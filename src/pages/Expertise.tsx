@@ -44,6 +44,17 @@ const Expertise = () => {
       ],
     },
     {
+      icon: Globe,
+      title: "Production photo & vidéo",
+      description: "Création de contenus visuels professionnels pour valoriser votre image et marquer les esprits.",
+      features: [
+        "Reportages photo",
+        "Vidéos institutionnelles",
+        "Captation d'événements",
+        "Post-production & montage",
+      ],
+    },
+    {
       icon: Shield,
       title: "Gestion de crise & réputation",
       description: "Protection et restauration de votre image en situation sensible.",
@@ -74,17 +85,6 @@ const Expertise = () => {
         "Media training",
         "Prise de parole publique",
         "Personal branding",
-      ],
-    },
-    {
-      icon: TrendingUp,
-      title: "Influence & leadership d'opinion",
-      description: "Positionnement en tant que leader d'opinion dans votre secteur.",
-      features: [
-        "Stratégie d'influence",
-        "Publication d'articles",
-        "Interventions médias",
-        "Thought leadership",
       ],
     },
   ];

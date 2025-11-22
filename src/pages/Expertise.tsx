@@ -48,7 +48,7 @@ const Expertise = () => {
       title: "Production photo & vidéo",
       description: "Création de contenus visuels professionnels pour valoriser votre image et marquer les esprits.",
       features: [
-        "Reportages photo",
+        "Photographie institutionnelle",
         "Vidéos institutionnelles",
         "Captation d'événements",
         "Post-production & montage",

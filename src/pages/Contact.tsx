@@ -76,11 +76,11 @@ const Contact = () => {
                           <Phone className="text-primary-foreground" size={20} />
                         </div>
                         <div>
-                          <a href="tel:+33123456789" className="text-primary-foreground hover:text-accent transition-colors text-lg">
-                            +33 1 23 45 67 89
+                          <a href="tel:+225272220292" className="text-primary-foreground hover:text-accent transition-colors text-lg">
+                            +225 27 22 20 29 21
                           </a>
-                          <a href="tel:+33987654321" className="block text-primary-foreground/80 hover:text-accent transition-colors text-sm mt-1">
-                            +33 9 87 65 43 21
+                          <a href="tel:+225075816094" className="block text-primary-foreground/80 hover:text-accent transition-colors text-sm mt-1">
+                            +225 07 58 16 09 04
                           </a>
                         </div>
                       </div>
@@ -102,8 +102,9 @@ const Contact = () => {
                         </div>
                         <div>
                           <p className="text-primary-foreground/90">
-                            123 Avenue des Champs-Élysées<br />
-                            75008 Paris, France
+                            Cocody Riviéra Faya<br />
+                            Pharmacie Ephrata<br />
+                            Abidjan, Côte d'Ivoire
                           </p>
                         </div>
                       </div>

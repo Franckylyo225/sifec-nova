@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
@@ -12,10 +13,13 @@ import {
   BookOpen,
   Megaphone,
   ArrowRight,
+  Check,
+  ChevronRight,
 } from "lucide-react";
 import expertiseHeroImage from "@/assets/expertise-hero.jpg";
 
 const Expertise = () => {
+  const [activeIndex, setActiveIndex] = useState<number | null>(null);
   const expertiseAreas = [
     {
       icon: Target,
@@ -106,37 +110,120 @@ const Expertise = () => {
         </div>
       </section>
 
-      {/* Expertise Areas */}
+      {/* Expertise Areas - Innovative Interactive Design */}
       <section className="py-24 bg-background">
-        <div className="container mx-auto px-6">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            {expertiseAreas.map((area, index) => (
-              <Card
-                key={index}
-                className="hover-lift border-border bg-card group"
-                style={{ animationDelay: `${index * 0.1}s` }}
-              >
-                <CardContent className="p-8">
-                  <div className="mb-6 w-16 h-16 bg-gradient-to-br from-primary to-primary-light rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                    <area.icon className="text-primary-foreground" size={32} />
+        <div className="container mx-auto px-6 max-w-7xl">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-display font-bold mb-4">
+              Six domaines d'<span className="bg-gradient-to-r from-accent to-accent-light bg-clip-text text-transparent">excellence</span>
+            </h2>
+            <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto">
+              Cliquez sur chaque expertise pour découvrir nos services en détail
+            </p>
+          </div>
+
+          <div className="space-y-4">
+            {expertiseAreas.map((area, index) => {
+              const isActive = activeIndex === index;
+              const IconComponent = area.icon;
+              
+              return (
+                <div
+                  key={index}
+                  className={`group relative overflow-hidden rounded-2xl border transition-all duration-500 cursor-pointer ${
+                    isActive 
+                      ? 'bg-gradient-to-br from-primary/5 to-accent/5 border-primary shadow-xl' 
+                      : 'bg-card border-border hover:border-primary/50 hover:shadow-lg'
+                  }`}
+                  onClick={() => setActiveIndex(isActive ? null : index)}
+                  style={{ 
+                    animationDelay: `${index * 0.1}s`,
+                  }}
+                >
+                  {/* Header - Always Visible */}
+                  <div className="flex items-center justify-between p-6 md:p-8">
+                    <div className="flex items-center gap-4 md:gap-6 flex-1">
+                      <div 
+                        className={`flex-shrink-0 w-14 h-14 md:w-16 md:h-16 rounded-xl flex items-center justify-center transition-all duration-500 ${
+                          isActive
+                            ? 'bg-gradient-to-br from-primary to-primary-light scale-110 shadow-lg shadow-primary/30'
+                            : 'bg-gradient-to-br from-primary/10 to-primary-light/10 group-hover:scale-105'
+                        }`}
+                      >
+                        <IconComponent 
+                          className={isActive ? 'text-primary-foreground' : 'text-primary'} 
+                          size={28}
+                        />
+                      </div>
+                      
+                      <div className="flex-1">
+                        <h3 className={`text-xl md:text-2xl font-display font-bold transition-colors duration-300 ${
+                          isActive ? 'text-primary' : 'text-foreground group-hover:text-primary'
+                        }`}>
+                          {area.title}
+                        </h3>
+                        <p className={`text-sm md:text-base mt-1 transition-colors duration-300 ${
+                          isActive ? 'text-foreground' : 'text-muted-foreground'
+                        }`}>
+                          {area.description}
+                        </p>
+                      </div>
+                    </div>
+
+                    <ChevronRight 
+                      className={`flex-shrink-0 ml-4 transition-all duration-500 ${
+                        isActive 
+                          ? 'rotate-90 text-primary' 
+                          : 'text-muted-foreground group-hover:text-primary group-hover:translate-x-1'
+                      }`}
+                      size={24}
+                    />
                   </div>
-                  <h3 className="text-2xl font-serif font-bold mb-4 group-hover:text-primary transition-colors">
-                    {area.title}
-                  </h3>
-                  <p className="text-muted-foreground mb-6 leading-relaxed">
-                    {area.description}
-                  </p>
-                  <ul className="space-y-2">
-                    {area.features.map((feature, idx) => (
-                      <li key={idx} className="flex items-center text-sm text-foreground">
-                        <div className="w-1.5 h-1.5 rounded-full bg-accent mr-3" />
-                        {feature}
-                      </li>
-                    ))}
-                  </ul>
-                </CardContent>
-              </Card>
-            ))}
+
+                  {/* Expanded Content */}
+                  <div 
+                    className={`overflow-hidden transition-all duration-500 ${
+                      isActive ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
+                    }`}
+                  >
+                    <div className="px-6 md:px-8 pb-6 md:pb-8 pt-0">
+                      <div className="border-t border-border/50 pt-6">
+                        <h4 className="text-sm font-semibold text-primary mb-4 uppercase tracking-wider">
+                          Services inclus
+                        </h4>
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                          {area.features.map((feature, idx) => (
+                            <div
+                              key={idx}
+                              className="flex items-center gap-3 p-3 rounded-lg bg-background/50 backdrop-blur-sm border border-border/50 hover:border-primary/30 transition-all duration-300 group/feature"
+                              style={{ 
+                                animationDelay: `${idx * 0.05}s`,
+                                animation: isActive ? 'fadeInUp 0.5s ease-out forwards' : 'none',
+                                opacity: isActive ? 1 : 0,
+                              }}
+                            >
+                              <div className="flex-shrink-0 w-5 h-5 rounded-full bg-gradient-to-br from-accent to-accent-light flex items-center justify-center group-hover/feature:scale-110 transition-transform duration-300">
+                                <Check size={12} className="text-accent-foreground" strokeWidth={3} />
+                              </div>
+                              <span className="text-sm font-medium text-foreground group-hover/feature:text-primary transition-colors">
+                                {feature}
+                              </span>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Decorative gradient line */}
+                  <div 
+                    className={`absolute bottom-0 left-0 h-1 bg-gradient-to-r from-primary via-accent to-primary-light transition-all duration-500 ${
+                      isActive ? 'w-full opacity-100' : 'w-0 opacity-0'
+                    }`}
+                  />
+                </div>
+              );
+            })}
           </div>
         </div>
       </section>

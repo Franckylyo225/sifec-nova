@@ -2,81 +2,6 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Award, Heart, Globe, Zap } from "lucide-react";
 import aboutHeroImage from "@/assets/about-hero.jpg";
 import teamPhoto from "@/assets/team-photo.jpg";
-import { useEffect, useRef, useState } from "react";
-
-const ValueCard = ({ value, index, total }: { value: any; index: number; total: number }) => {
-  const [scrollProgress, setScrollProgress] = useState(0);
-  const cardRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      if (!cardRef.current) return;
-      
-      const rect = cardRef.current.getBoundingClientRect();
-      const windowHeight = window.innerHeight;
-      const scrollStart = windowHeight * 0.3;
-      const scrollEnd = windowHeight * 0.7;
-      
-      if (rect.top <= scrollStart && rect.top >= scrollEnd - windowHeight) {
-        const progress = (scrollStart - rect.top) / (scrollStart - scrollEnd + windowHeight);
-        setScrollProgress(Math.max(0, Math.min(1, progress)));
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    handleScroll();
-    
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  const isActive = scrollProgress > index / total && scrollProgress <= (index + 1) / total;
-  const isPast = scrollProgress > (index + 1) / total;
-  
-  const scale = isPast ? 0.85 : isActive ? 1 : 0.95 - (total - index - 1) * 0.03;
-  const translateY = isPast ? -100 : (total - index - 1) * 15;
-  const opacity = isPast ? 0 : isActive ? 1 : 0.6;
-  const rotateX = isPast ? 10 : 0;
-
-  return (
-    <div 
-      ref={cardRef}
-      className="absolute w-full transition-all duration-500 ease-out"
-      style={{ 
-        top: `${index * 20}px`,
-        transform: `
-          translateY(${translateY}px) 
-          scale(${scale})
-          rotateX(${rotateX}deg)
-          perspective(1000px)
-        `,
-        opacity: opacity,
-        zIndex: total - index,
-        transformStyle: 'preserve-3d',
-      }}
-    >
-      <Card 
-        className="border-border bg-card shadow-2xl backdrop-blur-sm"
-        style={{
-          boxShadow: isActive 
-            ? '0 25px 50px -12px rgba(0, 0, 0, 0.25), 0 0 0 1px rgba(255, 255, 255, 0.1)' 
-            : '0 10px 25px -5px rgba(0, 0, 0, 0.1)',
-        }}
-      >
-        <CardContent className="p-8">
-          <div className="mb-4 w-14 h-14 bg-gradient-to-br from-accent to-accent-light rounded-lg flex items-center justify-center shadow-lg">
-            <value.icon className="text-accent-foreground" size={28} />
-          </div>
-          <h3 className="text-2xl font-display font-semibold mb-3 text-foreground">
-            {value.title}
-          </h3>
-          <p className="text-muted-foreground leading-relaxed">
-            {value.description}
-          </p>
-        </CardContent>
-      </Card>
-    </div>
-  );
-};
 
 
 const About = () => {
@@ -158,9 +83,9 @@ const About = () => {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-7xl mx-auto items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-7xl mx-auto items-start">
             {/* Team Image */}
-            <div className="relative h-[700px] rounded-2xl overflow-hidden shadow-2xl sticky top-24">
+            <div className="relative h-[700px] rounded-2xl overflow-hidden shadow-2xl">
               <img 
                 src={teamPhoto} 
                 alt="L'équipe SIFEC" 
@@ -169,15 +94,26 @@ const About = () => {
               <div className="absolute inset-0 bg-gradient-to-t from-primary/30 to-transparent" />
             </div>
 
-            {/* Stacked Values Cards */}
-            <div className="relative" style={{ minHeight: '1800px' }}>
-              <div className="sticky top-24 h-[500px]">
-                <div className="relative w-full h-full">
-                  {values.map((value, index) => (
-                    <ValueCard key={index} value={value} index={index} total={values.length} />
-                  ))}
-                </div>
-              </div>
+            {/* Values Cards Grid */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+              {values.map((value, index) => (
+                <Card
+                  key={index}
+                  className="border-border bg-card hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
+                >
+                  <CardContent className="p-6">
+                    <div className="mb-4 w-12 h-12 bg-gradient-to-br from-accent to-accent-light rounded-lg flex items-center justify-center">
+                      <value.icon className="text-accent-foreground" size={24} />
+                    </div>
+                    <h3 className="text-xl font-display font-semibold mb-2">
+                      {value.title}
+                    </h3>
+                    <p className="text-muted-foreground text-sm leading-relaxed">
+                      {value.description}
+                    </p>
+                  </CardContent>
+                </Card>
+              ))}
             </div>
           </div>
         </div>

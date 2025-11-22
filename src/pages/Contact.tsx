@@ -52,128 +52,114 @@ const Contact = () => {
       </section>
 
       {/* Contact Section */}
-      <section className="py-32 bg-background">
-        <div className="container mx-auto px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 max-w-6xl mx-auto">
-            {/* Contact Info */}
-            <div className="space-y-8">
-              <div>
-                <h2 className="text-4xl md:text-5xl font-display font-bold mb-6">
-                  Nos <span className="bg-gradient-to-r from-accent to-accent-light bg-clip-text text-transparent">coordonnées</span>
-                </h2>
-                <p className="text-muted-foreground leading-relaxed font-light">
-                  Notre équipe est à votre disposition pour échanger sur vos besoins en communication.
-                </p>
-              </div>
-
-              <Card className="border-border bg-card">
-                <CardContent className="p-6 space-y-6">
-                  <div className="flex items-start space-x-4">
-                    <div className="w-10 h-10 bg-gradient-to-br from-primary to-primary-light rounded-lg flex items-center justify-center flex-shrink-0">
-                      <Mail className="text-primary-foreground" size={20} />
-                    </div>
+      <section className="py-20 bg-gradient-to-b from-background to-secondary/20">
+        <div className="container mx-auto px-6">
+          <div className="max-w-6xl mx-auto">
+            <div className="grid grid-cols-1 lg:grid-cols-5 gap-8">
+              {/* Contact Info Card */}
+              <div className="lg:col-span-2">
+                <Card className="h-full border-none shadow-2xl bg-gradient-to-br from-primary via-primary to-primary-light overflow-hidden relative">
+                  <div className="absolute bottom-0 right-0 w-48 h-48 bg-primary-light/20 rounded-full blur-3xl" />
+                  <CardContent className="p-8 space-y-8 relative z-10">
                     <div>
-                      <h3 className="font-semibold mb-1">Email</h3>
-                      <a href="mailto:contact@sifec.com" className="text-muted-foreground hover:text-accent transition-colors">
-                        contact@sifec.com
-                      </a>
-                    </div>
-                  </div>
-
-                  <div className="flex items-start space-x-4">
-                    <div className="w-10 h-10 bg-gradient-to-br from-accent to-accent-light rounded-lg flex items-center justify-center flex-shrink-0">
-                      <Phone className="text-accent-foreground" size={20} />
-                    </div>
-                    <div>
-                      <h3 className="font-semibold mb-1">Téléphone</h3>
-                      <a href="tel:+33123456789" className="text-muted-foreground hover:text-accent transition-colors">
-                        +33 1 23 45 67 89
-                      </a>
-                    </div>
-                  </div>
-
-                  <div className="flex items-start space-x-4">
-                    <div className="w-10 h-10 bg-gradient-to-br from-gold to-gold/80 rounded-lg flex items-center justify-center flex-shrink-0">
-                      <MapPin className="text-gold-foreground" size={20} />
-                    </div>
-                    <div>
-                      <h3 className="font-semibold mb-1">Adresse</h3>
-                      <p className="text-muted-foreground">
-                        123 Avenue des Champs-Élysées<br />
-                        75008 Paris, France
+                      <h2 className="text-3xl font-display font-bold mb-4 text-primary-foreground">
+                        Informations de contact
+                      </h2>
+                      <p className="text-primary-foreground/90 leading-relaxed">
+                        Notre équipe est à votre disposition pour échanger sur vos besoins en communication.
                       </p>
                     </div>
-                  </div>
-                </CardContent>
-              </Card>
 
-              <div className="bg-secondary p-6 rounded-lg">
-                <h3 className="font-semibold mb-2">Horaires d'ouverture</h3>
-                <div className="space-y-1 text-sm text-muted-foreground">
-                  <p>Lundi - Vendredi : 9h - 18h</p>
-                  <p>Samedi - Dimanche : Fermé</p>
-                </div>
-              </div>
-            </div>
-
-            {/* Contact Form */}
-            <div className="lg:col-span-2">
-              <Card className="border-border bg-card">
-                <CardContent className="p-8">
-                  <h2 className="text-3xl font-display font-bold mb-6">
-                    Envoyez-nous un <span className="bg-gradient-to-r from-accent to-accent-light bg-clip-text text-transparent">message</span>
-                  </h2>
-                  <form onSubmit={handleSubmit} className="space-y-6">
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                      <div>
-                        <label htmlFor="name" className="block text-sm font-medium mb-2">
-                          Nom complet *
-                        </label>
-                        <Input
-                          id="name"
-                          name="name"
-                          value={formData.name}
-                          onChange={handleChange}
-                          required
-                          placeholder="Jean Dupont"
-                          className="border-border"
-                        />
+                    <div className="space-y-6">
+                      <div className="flex items-start space-x-4">
+                        <div className="w-12 h-12 bg-primary-foreground/10 backdrop-blur-sm rounded-full flex items-center justify-center flex-shrink-0">
+                          <Phone className="text-primary-foreground" size={20} />
+                        </div>
+                        <div>
+                          <a href="tel:+33123456789" className="text-primary-foreground hover:text-accent transition-colors text-lg">
+                            +33 1 23 45 67 89
+                          </a>
+                          <a href="tel:+33987654321" className="block text-primary-foreground/80 hover:text-accent transition-colors text-sm mt-1">
+                            +33 9 87 65 43 21
+                          </a>
+                        </div>
                       </div>
-                      <div>
-                        <label htmlFor="email" className="block text-sm font-medium mb-2">
-                          Email *
-                        </label>
-                        <Input
-                          id="email"
-                          name="email"
-                          type="email"
-                          value={formData.email}
-                          onChange={handleChange}
-                          required
-                          placeholder="jean.dupont@example.com"
-                          className="border-border"
-                        />
+
+                      <div className="flex items-start space-x-4">
+                        <div className="w-12 h-12 bg-primary-foreground/10 backdrop-blur-sm rounded-full flex items-center justify-center flex-shrink-0">
+                          <Mail className="text-primary-foreground" size={20} />
+                        </div>
+                        <div>
+                          <a href="mailto:contact@sifec.com" className="text-primary-foreground hover:text-accent transition-colors">
+                            contact@sifec.com
+                          </a>
+                        </div>
+                      </div>
+
+                      <div className="flex items-start space-x-4">
+                        <div className="w-12 h-12 bg-primary-foreground/10 backdrop-blur-sm rounded-full flex items-center justify-center flex-shrink-0">
+                          <MapPin className="text-primary-foreground" size={20} />
+                        </div>
+                        <div>
+                          <p className="text-primary-foreground/90">
+                            123 Avenue des Champs-Élysées<br />
+                            75008 Paris, France
+                          </p>
+                        </div>
                       </div>
                     </div>
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                      <div>
-                        <label htmlFor="phone" className="block text-sm font-medium mb-2">
-                          Téléphone
-                        </label>
-                        <Input
-                          id="phone"
-                          name="phone"
-                          type="tel"
-                          value={formData.phone}
-                          onChange={handleChange}
-                          placeholder="+33 1 23 45 67 89"
-                          className="border-border"
-                        />
+                    <div className="pt-6 border-t border-primary-foreground/20">
+                      <h3 className="font-display font-semibold mb-3 text-primary-foreground">Horaires d'ouverture</h3>
+                      <div className="space-y-1 text-sm text-primary-foreground/80">
+                        <p>Lundi - Vendredi : 9h - 18h</p>
+                        <p>Samedi - Dimanche : Fermé</p>
                       </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              </div>
+
+              {/* Contact Form */}
+              <div className="lg:col-span-3">
+                <Card className="h-full border-border shadow-xl">
+                  <CardContent className="p-8">
+                    <form onSubmit={handleSubmit} className="space-y-6">
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                          <label htmlFor="name" className="block text-sm font-medium mb-2 text-foreground">
+                            Nom complet
+                          </label>
+                          <Input
+                            id="name"
+                            name="name"
+                            value={formData.name}
+                            onChange={handleChange}
+                            required
+                            placeholder="Jean Dupont"
+                            className="border-border h-12 bg-background"
+                          />
+                        </div>
+                        <div>
+                          <label htmlFor="email" className="block text-sm font-medium mb-2 text-foreground">
+                            Votre Email
+                          </label>
+                          <Input
+                            id="email"
+                            name="email"
+                            type="email"
+                            value={formData.email}
+                            onChange={handleChange}
+                            required
+                            placeholder="jean.dupont@example.com"
+                            className="border-border h-12 bg-background"
+                          />
+                        </div>
+                      </div>
+
                       <div>
-                        <label htmlFor="subject" className="block text-sm font-medium mb-2">
-                          Sujet *
+                        <label htmlFor="subject" className="block text-sm font-medium mb-2 text-foreground">
+                          Votre Sujet
                         </label>
                         <Input
                           id="subject"
@@ -182,38 +168,37 @@ const Contact = () => {
                           onChange={handleChange}
                           required
                           placeholder="Demande de devis"
-                          className="border-border"
+                          className="border-border h-12 bg-background"
                         />
                       </div>
-                    </div>
 
-                    <div>
-                      <label htmlFor="message" className="block text-sm font-medium mb-2">
-                        Message *
-                      </label>
-                      <Textarea
-                        id="message"
-                        name="message"
-                        value={formData.message}
-                        onChange={handleChange}
-                        required
-                        placeholder="Décrivez votre projet et vos besoins..."
-                        rows={6}
-                        className="border-border resize-none"
-                      />
-                    </div>
+                      <div>
+                        <label htmlFor="message" className="block text-sm font-medium mb-2 text-foreground">
+                          Message
+                        </label>
+                        <Textarea
+                          id="message"
+                          name="message"
+                          value={formData.message}
+                          onChange={handleChange}
+                          required
+                          placeholder="Écrivez votre message..."
+                          rows={8}
+                          className="border-border resize-none bg-background"
+                        />
+                      </div>
 
-                    <Button
-                      type="submit"
-                      size="lg"
-                      className="w-full bg-accent hover:bg-accent-light text-accent-foreground"
-                    >
-                      Envoyer le message
-                      <Send className="ml-2" size={18} />
-                    </Button>
-                  </form>
-                </CardContent>
-              </Card>
+                      <Button
+                        type="submit"
+                        size="lg"
+                        className="bg-primary hover:bg-primary-light text-primary-foreground h-12 px-8 rounded-lg font-medium transition-all hover:shadow-lg"
+                      >
+                        Envoyer le message
+                      </Button>
+                    </form>
+                  </CardContent>
+                </Card>
+              </div>
             </div>
           </div>
         </div>

@@ -1,6 +1,60 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Award, Heart, Globe, Zap } from "lucide-react";
 import aboutHeroImage from "@/assets/about-hero.jpg";
+import teamPhoto from "@/assets/team-photo.jpg";
+import { useEffect, useRef, useState } from "react";
+
+const ValueCard = ({ value, index }: { value: any; index: number }) => {
+  const [isVisible, setIsVisible] = useState(false);
+  const cardRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+        }
+      },
+      { threshold: 0.2 }
+    );
+
+    if (cardRef.current) {
+      observer.observe(cardRef.current);
+    }
+
+    return () => {
+      if (cardRef.current) {
+        observer.unobserve(cardRef.current);
+      }
+    };
+  }, []);
+
+  return (
+    <div
+      ref={cardRef}
+      className={`transition-all duration-700 ${
+        isVisible 
+          ? 'opacity-100 translate-y-0' 
+          : 'opacity-0 translate-y-12'
+      }`}
+      style={{ transitionDelay: `${index * 150}ms` }}
+    >
+      <Card className="border-border bg-card hover:shadow-xl transition-shadow duration-300">
+        <CardContent className="p-8">
+          <div className="mb-4 w-14 h-14 bg-gradient-to-br from-accent to-accent-light rounded-lg flex items-center justify-center">
+            <value.icon className="text-accent-foreground" size={28} />
+          </div>
+          <h3 className="text-2xl font-display font-semibold mb-3">
+            {value.title}
+          </h3>
+          <p className="text-muted-foreground">
+            {value.description}
+          </p>
+        </CardContent>
+      </Card>
+    </div>
+  );
+};
 
 const About = () => {
   const values = [
@@ -81,26 +135,23 @@ const About = () => {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-            {values.map((value, index) => (
-              <Card
-                key={index}
-                className="hover-lift border-border bg-card"
-                style={{ animationDelay: `${index * 0.1}s` }}
-              >
-                <CardContent className="p-8">
-                  <div className="mb-4 w-14 h-14 bg-gradient-to-br from-accent to-accent-light rounded-lg flex items-center justify-center">
-                    <value.icon className="text-accent-foreground" size={28} />
-                  </div>
-                  <h3 className="text-2xl font-display font-semibold mb-3">
-                    {value.title}
-                  </h3>
-                  <p className="text-muted-foreground">
-                    {value.description}
-                  </p>
-                </CardContent>
-              </Card>
-            ))}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-7xl mx-auto items-start">
+            {/* Team Image */}
+            <div className="relative h-[600px] rounded-2xl overflow-hidden shadow-2xl">
+              <img 
+                src={teamPhoto} 
+                alt="L'équipe SIFEC" 
+                className="w-full h-full object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-primary/30 to-transparent" />
+            </div>
+
+            {/* Stacked Values Cards */}
+            <div className="relative space-y-6">
+              {values.map((value, index) => (
+                <ValueCard key={index} value={value} index={index} />
+              ))}
+            </div>
           </div>
         </div>
       </section>

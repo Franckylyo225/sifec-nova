@@ -78,12 +78,13 @@ const Expertise = () => {
     },
     {
       icon: Lightbulb,
-      title: "Conseil en image & personal branding",
+      title: "Conseil en image",
       description: "Développement de votre marque personnelle et coaching média.",
       features: [
         "Audit d'image",
         "Media training",
         "Prise de parole publique",
+        "Personal branding",
       ],
     },
   ];

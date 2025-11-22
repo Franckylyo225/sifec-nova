@@ -55,6 +55,24 @@ const Contact = () => {
       <section className="py-20 bg-gradient-to-b from-background to-secondary/20">
         <div className="container mx-auto px-6">
           <div className="max-w-6xl mx-auto">
+            {/* Map Section */}
+            <div className="mb-12">
+              <h2 className="text-4xl md:text-5xl font-display font-bold mb-8 text-center">
+                Nous <span className="bg-gradient-to-r from-accent to-accent-light bg-clip-text text-transparent">localiser</span>
+              </h2>
+              <div className="relative w-full h-[400px] rounded-2xl overflow-hidden shadow-2xl border border-border">
+                <iframe
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3972.2134445!2d-3.9617!3d5.3599!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNcKwMjEnMzUuNiJOIDPCsDU3JzQyLjEiVw!5e0!3m2!1sfr!2sci!4v1234567890!5m2!1sfr!2sci&q=Cocody+Riviéra+Faya,+Pharmacie+Ephrata,+Abidjan"
+                  width="100%"
+                  height="100%"
+                  style={{ border: 0 }}
+                  allowFullScreen
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  title="Localisation SIFEC - Cocody Riviéra Faya, Abidjan"
+                />
+              </div>
+            </div>
             <div className="grid grid-cols-1 lg:grid-cols-5 gap-8">
               {/* Contact Info Card */}
               <div className="lg:col-span-2">

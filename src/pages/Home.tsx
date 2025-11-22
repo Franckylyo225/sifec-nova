@@ -184,8 +184,8 @@ const Home = () => {
       <section className="py-32 bg-background">
         <div className="container mx-auto px-8">
           <div className="text-center mb-20">
-            <h2 className="text-5xl md:text-6xl font-display font-bold mb-6 tracking-tight">
-              Notre <span className="text-gradient-accent">Expertise</span>
+            <h2 className="text-4xl md:text-5xl font-display font-bold mb-6 tracking-tight">
+              Notre <span className="bg-gradient-to-r from-accent to-accent-light bg-clip-text text-transparent">Expertise</span>
             </h2>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto font-light">
               Des solutions sur mesure pour répondre aux enjeux de communication les plus complexes
@@ -230,7 +230,7 @@ const Home = () => {
         <div className="container mx-auto px-8">
           <div className="flex justify-between items-end mb-16">
             <div>
-              <h2 className="text-5xl md:text-6xl font-display font-bold mb-4 tracking-tight">
+              <h2 className="text-4xl md:text-5xl font-display font-bold mb-4 tracking-tight">
                 Notre Travail
               </h2>
               <p className="text-xl text-muted-foreground font-light">
@@ -286,7 +286,7 @@ const Home = () => {
       <section className="py-32 bg-muted/30">
         <div className="container mx-auto px-8">
           <div className="text-center mb-16">
-            <h2 className="text-5xl md:text-6xl font-display font-bold mb-4 tracking-tight">
+            <h2 className="text-4xl md:text-5xl font-display font-bold mb-4 tracking-tight">
               Nos Dernières Réalisations
             </h2>
             <p className="text-xl text-muted-foreground font-light">
@@ -306,7 +306,7 @@ const Home = () => {
 
         <div className="container mx-auto px-8 relative z-10">
           <div className="text-center mb-20">
-            <h2 className="text-5xl md:text-6xl font-display font-bold mb-6 tracking-tight">
+            <h2 className="text-4xl md:text-5xl font-display font-bold mb-6 tracking-tight">
               Nos Résultats en Chiffres
             </h2>
             <p className="text-xl text-primary-foreground/90 max-w-2xl mx-auto font-light">
@@ -323,7 +323,7 @@ const Home = () => {
         <div className="container mx-auto px-8">
           <div className="text-center mb-16">
             <p className="text-sm font-medium text-muted-foreground uppercase tracking-wider mb-4">Ils nous font confiance</p>
-            <h2 className="text-4xl md:text-5xl font-display font-bold tracking-tight">
+            <h2 className="text-4xl md:text-5xl font-display font-bold mb-4 tracking-tight">
               Nos Références
             </h2>
           </div>
@@ -348,7 +348,7 @@ const Home = () => {
         <div className="container mx-auto px-8">
           <div className="flex justify-between items-end mb-16">
             <div>
-              <h2 className="text-5xl md:text-6xl font-display font-bold mb-4 tracking-tight">
+              <h2 className="text-4xl md:text-5xl font-display font-bold mb-4 tracking-tight">
                 News & Insights
               </h2>
               <p className="text-xl text-muted-foreground font-light">

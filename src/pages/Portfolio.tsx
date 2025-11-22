@@ -136,7 +136,7 @@ const Portfolio = () => {
         <div className="absolute inset-0 bg-gradient-to-br from-primary/90 to-primary-light/80" />
         <div className="container mx-auto px-6 relative z-10">
           <div className="max-w-4xl mx-auto text-center">
-            <h1 className="text-5xl md:text-7xl font-serif font-bold mb-6 animate-fade-in-up text-primary-foreground">
+            <h1 className="text-5xl md:text-7xl font-display font-bold mb-6 animate-fade-in-up text-primary-foreground">
               Notre <span className="text-accent">Portfolio</span>
             </h1>
             <p className="text-xl md:text-2xl text-primary-foreground/90 animate-fade-in-up" style={{ animationDelay: "0.2s" }}>
@@ -157,7 +157,7 @@ const Portfolio = () => {
               { number: "98%", label: "Taux de satisfaction" },
             ].map((stat, index) => (
               <div key={index} className="text-center">
-                <div className="text-4xl md:text-5xl font-serif font-bold text-primary mb-2">
+                <div className="text-4xl md:text-5xl font-display font-bold text-primary mb-2">
                   {stat.number}
                 </div>
                 <div className="text-sm text-muted-foreground">{stat.label}</div>
@@ -171,7 +171,7 @@ const Portfolio = () => {
       <section className="py-32 bg-background">
         <div className="container mx-auto px-8">
           <div className="text-center mb-16">
-            <h2 className="text-5xl md:text-6xl font-display font-bold mb-4 tracking-tight">
+            <h2 className="text-4xl md:text-5xl font-display font-bold mb-4 tracking-tight">
               Nos Projets
             </h2>
             <p className="text-xl text-muted-foreground font-light">
@@ -294,7 +294,7 @@ const Portfolio = () => {
           <div className="max-w-4xl mx-auto text-center">
             <div className="mb-8">
               <div className="text-6xl text-accent mb-4">"</div>
-              <p className="text-2xl font-serif text-foreground leading-relaxed mb-8">
+              <p className="text-2xl font-display text-foreground leading-relaxed mb-8">
                 SIFEC a transformé notre communication institutionnelle. Leur expertise et leur professionnalisme sont sans égal. Une équipe réactive, stratégique et profondément engagée dans notre réussite.
               </p>
               <div className="text-muted-foreground">

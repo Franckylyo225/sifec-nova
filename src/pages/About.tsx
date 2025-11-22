@@ -37,7 +37,7 @@ const About = () => {
         <div className="absolute inset-0 bg-gradient-to-br from-primary/90 to-primary-light/80" />
         <div className="container mx-auto px-6 relative z-10">
           <div className="max-w-4xl mx-auto text-center">
-            <h1 className="text-5xl md:text-7xl font-serif font-bold mb-6 animate-fade-in-up text-primary-foreground">
+            <h1 className="text-5xl md:text-7xl font-display font-bold mb-6 animate-fade-in-up text-primary-foreground">
               À propos de <span className="text-accent">SIFEC</span>
             </h1>
             <p className="text-xl md:text-2xl text-primary-foreground/90 animate-fade-in-up" style={{ animationDelay: "0.2s" }}>
@@ -51,8 +51,8 @@ const About = () => {
       <section className="py-24 bg-background">
         <div className="container mx-auto px-6">
           <div className="max-w-4xl mx-auto">
-            <h2 className="text-4xl md:text-5xl font-serif font-bold mb-8 text-center">
-              Notre <span className="text-gradient-accent">Histoire</span>
+            <h2 className="text-4xl md:text-5xl font-display font-bold mb-8 text-center">
+              Notre <span className="bg-gradient-to-r from-accent to-accent-light bg-clip-text text-transparent">Histoire</span>
             </h2>
             <div className="space-y-6 text-lg text-muted-foreground leading-relaxed">
               <p>
@@ -73,8 +73,8 @@ const About = () => {
       <section className="py-24 bg-secondary">
         <div className="container mx-auto px-6">
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-serif font-bold mb-4">
-              Nos <span className="text-gradient-accent">Valeurs</span>
+            <h2 className="text-4xl md:text-5xl font-display font-bold mb-4">
+              Nos <span className="bg-gradient-to-r from-accent to-accent-light bg-clip-text text-transparent">Valeurs</span>
             </h2>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
               Les principes qui guident notre action au quotidien
@@ -92,7 +92,7 @@ const About = () => {
                   <div className="mb-4 w-14 h-14 bg-gradient-to-br from-accent to-accent-light rounded-lg flex items-center justify-center">
                     <value.icon className="text-accent-foreground" size={28} />
                   </div>
-                  <h3 className="text-2xl font-serif font-semibold mb-3">
+                  <h3 className="text-2xl font-display font-semibold mb-3">
                     {value.title}
                   </h3>
                   <p className="text-muted-foreground">
@@ -109,8 +109,8 @@ const About = () => {
       <section className="py-24 bg-background">
         <div className="container mx-auto px-6">
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-serif font-bold mb-4">
-              Notre <span className="text-gradient-accent">Équipe</span>
+            <h2 className="text-4xl md:text-5xl font-display font-bold mb-4">
+              Notre <span className="bg-gradient-to-r from-accent to-accent-light bg-clip-text text-transparent">Équipe</span>
             </h2>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
               Des professionnels passionnés et expérimentés à votre service

@@ -41,7 +41,7 @@ const Contact = () => {
         <div className="absolute inset-0 bg-gradient-to-br from-primary/90 to-primary-light/80" />
         <div className="container mx-auto px-6 relative z-10">
           <div className="max-w-4xl mx-auto text-center">
-            <h1 className="text-5xl md:text-7xl font-serif font-bold mb-6 animate-fade-in-up text-primary-foreground">
+            <h1 className="text-5xl md:text-7xl font-display font-bold mb-6 animate-fade-in-up text-primary-foreground">
               Contactez-<span className="text-accent">nous</span>
             </h1>
             <p className="text-xl md:text-2xl text-primary-foreground/90 animate-fade-in-up" style={{ animationDelay: "0.2s" }}>
@@ -58,8 +58,8 @@ const Contact = () => {
             {/* Contact Info */}
             <div className="space-y-8">
               <div>
-                <h2 className="text-4xl md:text-5xl font-serif font-bold mb-6">
-                  Nos <span className="text-gradient-accent">coordonnées</span>
+                <h2 className="text-4xl md:text-5xl font-display font-bold mb-6">
+                  Nos <span className="bg-gradient-to-r from-accent to-accent-light bg-clip-text text-transparent">coordonnées</span>
                 </h2>
                 <p className="text-muted-foreground leading-relaxed font-light">
                   Notre équipe est à votre disposition pour échanger sur vos besoins en communication.
@@ -120,8 +120,8 @@ const Contact = () => {
             <div className="lg:col-span-2">
               <Card className="border-border bg-card">
                 <CardContent className="p-8">
-                  <h2 className="text-3xl font-serif font-bold mb-6">
-                    Envoyez-nous un <span className="text-gradient-accent">message</span>
+                  <h2 className="text-3xl font-display font-bold mb-6">
+                    Envoyez-nous un <span className="bg-gradient-to-r from-accent to-accent-light bg-clip-text text-transparent">message</span>
                   </h2>
                   <form onSubmit={handleSubmit} className="space-y-6">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">

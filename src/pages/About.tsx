@@ -83,9 +83,9 @@ const About = () => {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-7xl mx-auto items-start">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-7xl mx-auto items-stretch">
             {/* Team Image */}
-            <div className="relative h-[700px] rounded-2xl overflow-hidden shadow-2xl">
+            <div className="relative rounded-2xl overflow-hidden shadow-2xl">
               <img 
                 src={teamPhoto} 
                 alt="L'équipe SIFEC" 

@@ -68,14 +68,22 @@ const Footer = () => {
               </li>
               <li className="flex items-center space-x-2">
                 <Phone size={16} className="text-accent" />
-                <a href="tel:+33123456789" className="text-sm text-primary-foreground/80 hover:text-accent transition-colors">
-                  +33 1 23 45 67 89
+                <a href="tel:+225272220292" className="text-sm text-primary-foreground/80 hover:text-accent transition-colors">
+                  +225 27 22 20 29 21
+                </a>
+              </li>
+              <li className="flex items-center space-x-2">
+                <Phone size={16} className="text-accent" />
+                <a href="tel:+225075816094" className="text-sm text-primary-foreground/80 hover:text-accent transition-colors">
+                  +225 07 58 16 09 04
                 </a>
               </li>
               <li className="flex items-start space-x-2">
                 <MapPin size={16} className="text-accent mt-1" />
                 <span className="text-sm text-primary-foreground/80">
-                  Paris, France
+                  Cocody Riviéra Faya<br />
+                  Pharmacie Ephrata<br />
+                  Abidjan, Côte d'Ivoire
                 </span>
               </li>
             </ul>

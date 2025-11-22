@@ -6,15 +6,15 @@ import {
   Target,
   Users,
   Shield,
-  Sparkles,
   Lightbulb,
   TrendingUp,
-  Globe,
   BookOpen,
   Megaphone,
   ArrowRight,
   Check,
   ChevronRight,
+  Camera,
+  Share2,
 } from "lucide-react";
 import expertiseHeroImage from "@/assets/expertise-hero.jpg";
 
@@ -44,7 +44,7 @@ const Expertise = () => {
       ],
     },
     {
-      icon: Globe,
+      icon: Camera,
       title: "Production photo & vidéo",
       description: "Création de contenus visuels professionnels pour valoriser votre image et marquer les esprits.",
       features: [
@@ -66,7 +66,7 @@ const Expertise = () => {
       ],
     },
     {
-      icon: Sparkles,
+      icon: Share2,
       title: "Communication digitale",
       description: "Stratégie digitale complète pour maximiser votre présence en ligne.",
       features: [

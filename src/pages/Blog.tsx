@@ -67,7 +67,7 @@ const Blog = () => {
         <div className="absolute inset-0 bg-gradient-to-br from-primary/90 to-primary-light/80" />
         <div className="container mx-auto px-6 relative z-10">
           <div className="max-w-4xl mx-auto text-center">
-            <h1 className="text-5xl md:text-7xl font-serif font-bold mb-6 animate-fade-in-up text-primary-foreground">
+            <h1 className="text-5xl md:text-7xl font-display font-bold mb-6 animate-fade-in-up text-primary-foreground">
               Notre <span className="text-accent">Blog</span>
             </h1>
             <p className="text-xl md:text-2xl text-primary-foreground/90 animate-fade-in-up" style={{ animationDelay: "0.2s" }}>
@@ -90,7 +90,7 @@ const Blog = () => {
                 <Badge className="w-fit mb-4" variant="secondary">
                   Article à la une
                 </Badge>
-                <h2 className="text-3xl font-serif font-bold mb-4 hover:text-primary transition-colors cursor-pointer">
+                <h2 className="text-3xl font-display font-bold mb-4 hover:text-primary transition-colors cursor-pointer">
                   {articles[0].title}
                 </h2>
                 <p className="text-muted-foreground mb-6 leading-relaxed">
@@ -130,7 +130,7 @@ const Blog = () => {
                   <Badge variant="outline" className="mb-3 text-xs">
                     {article.category}
                   </Badge>
-                  <h3 className="text-xl font-serif font-bold mb-3 group-hover:text-primary transition-colors">
+                  <h3 className="text-xl font-display font-bold mb-3 group-hover:text-primary transition-colors">
                     {article.title}
                   </h3>
                   <p className="text-muted-foreground text-sm mb-4 leading-relaxed line-clamp-3">
@@ -153,7 +153,7 @@ const Blog = () => {
       <section className="py-24 bg-gradient-to-br from-primary to-primary-light text-primary-foreground">
         <div className="container mx-auto px-6">
           <div className="max-w-3xl mx-auto text-center">
-            <h2 className="text-4xl font-serif font-bold mb-6">
+            <h2 className="text-4xl md:text-5xl font-display font-bold mb-6">
               Restez informé
             </h2>
             <p className="text-xl text-primary-foreground/90 mb-8">

@@ -4,42 +4,21 @@ import aboutHeroImage from "@/assets/about-hero.jpg";
 import teamPhoto from "@/assets/team-photo.jpg";
 import { useEffect, useRef, useState } from "react";
 
-const ValueCard = ({ value, index }: { value: any; index: number }) => {
-  const [isVisible, setIsVisible] = useState(false);
-  const cardRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-        }
-      },
-      { threshold: 0.2 }
-    );
-
-    if (cardRef.current) {
-      observer.observe(cardRef.current);
-    }
-
-    return () => {
-      if (cardRef.current) {
-        observer.unobserve(cardRef.current);
-      }
-    };
-  }, []);
-
+const ValueCard = ({ value, index, total }: { value: any; index: number; total: number }) => {
   return (
-    <div
-      ref={cardRef}
-      className={`transition-all duration-700 ${
-        isVisible 
-          ? 'opacity-100 translate-y-0' 
-          : 'opacity-0 translate-y-12'
-      }`}
-      style={{ transitionDelay: `${index * 150}ms` }}
+    <div 
+      className="sticky"
+      style={{ 
+        top: `${120 + index * 40}px`,
+        zIndex: total - index
+      }}
     >
-      <Card className="border-border bg-card hover:shadow-xl transition-shadow duration-300">
+      <Card 
+        className="border-border bg-card shadow-2xl transition-all duration-500 hover:shadow-accent/20"
+        style={{
+          transform: `rotate(${(index - (total - 1) / 2) * 1}deg) scale(${1 - index * 0.02})`,
+        }}
+      >
         <CardContent className="p-8">
           <div className="mb-4 w-14 h-14 bg-gradient-to-br from-accent to-accent-light rounded-lg flex items-center justify-center">
             <value.icon className="text-accent-foreground" size={28} />
@@ -147,9 +126,9 @@ const About = () => {
             </div>
 
             {/* Stacked Values Cards */}
-            <div className="relative space-y-6">
+            <div className="relative" style={{ minHeight: '1200px' }}>
               {values.map((value, index) => (
-                <ValueCard key={index} value={value} index={index} />
+                <ValueCard key={index} value={value} index={index} total={values.length} />
               ))}
             </div>
           </div>

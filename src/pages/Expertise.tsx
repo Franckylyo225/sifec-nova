@@ -84,7 +84,6 @@ const Expertise = () => {
         "Audit d'image",
         "Media training",
         "Prise de parole publique",
-        "Personal branding",
       ],
     },
   ];
@@ -151,7 +150,7 @@ const Expertise = () => {
                         }`}
                       >
                         <IconComponent 
-                          className={isActive ? 'text-primary-foreground' : 'text-primary'} 
+                          className={`transition-transform duration-500 group-hover:rotate-12 ${isActive ? 'text-primary-foreground' : 'text-primary'}`} 
                           size={28}
                         />
                       </div>

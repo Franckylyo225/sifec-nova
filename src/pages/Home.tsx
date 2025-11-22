@@ -125,33 +125,47 @@ const Home = () => {
           }}
         />
         
-        {/* Gradient Overlay */}
+        {/* Refined Gradient Overlay - More subtle, Apple-like */}
         <div 
           className="absolute inset-0" 
           style={{ 
-            background: "var(--gradient-overlay)",
+            background: "linear-gradient(180deg, rgba(0,0,0,0.65) 0%, rgba(0,0,0,0.4) 50%, rgba(0,0,0,0.65) 100%)",
             zIndex: -1 
           }} 
         />
 
-        {/* Hero Content */}
-        <div className="container mx-auto px-8 text-center z-10">
-          <h1 className="text-5xl md:text-7xl lg:text-8xl font-display font-bold mb-8 animate-fade-in-up text-primary-foreground tracking-tight leading-tight">
-            <span className="text-gradient-accent">SIFEC</span> — L'expertise qui donne du <span className="text-accent">pouvoir à votre image</span>.
+        {/* Hero Content - Apple-inspired spacing and typography */}
+        <div className="container mx-auto px-6 md:px-12 text-center z-10 max-w-7xl">
+          <h1 className="text-6xl md:text-8xl lg:text-9xl font-display font-bold mb-6 md:mb-8 animate-fade-in-up text-white tracking-tighter leading-[0.95]">
+            <span className="block mb-2 md:mb-3 bg-gradient-to-r from-white via-white to-white/80 bg-clip-text text-transparent">
+              SIFEC
+            </span>
+            <span className="block text-4xl md:text-6xl lg:text-7xl font-light tracking-tight leading-tight text-white/95">
+              L'expertise qui donne du{" "}
+              <span className="font-semibold bg-gradient-to-r from-accent to-accent-light bg-clip-text text-transparent">
+                pouvoir à votre image
+              </span>
+            </span>
           </h1>
-          <p className="text-xl md:text-2xl mb-12 max-w-3xl mx-auto animate-fade-in-up text-primary-foreground/90 font-light" style={{ animationDelay: "0.2s" }}>
+          <p className="text-lg md:text-2xl lg:text-3xl mb-12 md:mb-16 max-w-4xl mx-auto animate-fade-in-up text-white/80 font-light leading-relaxed" style={{ animationDelay: "0.15s" }}>
             Votre partenaire stratégique pour une communication institutionnelle forte, cohérente et performante.
           </p>
-          <div className="flex flex-col sm:flex-row gap-6 justify-center animate-fade-in-up" style={{ animationDelay: "0.4s" }}>
+          <div className="flex flex-col sm:flex-row gap-4 md:gap-6 justify-center items-center animate-fade-in-up" style={{ animationDelay: "0.3s" }}>
             <Link to="/contact">
-              <Button size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground text-base px-10 py-7 rounded-full font-medium">
+              <Button 
+                size="lg" 
+                className="bg-white hover:bg-white/90 text-primary text-base md:text-lg px-8 md:px-12 py-6 md:py-7 rounded-full font-medium transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-2xl"
+              >
                 Découvrir nos services
-                <ArrowRight className="ml-2" size={20} />
               </Button>
             </Link>
             <Link to="/portfolio">
-              <Button size="lg" variant="outline" className="border-2 border-primary-foreground/30 bg-primary-foreground/5 backdrop-blur-sm text-primary-foreground hover:bg-primary-foreground/10 text-base px-10 py-7 rounded-full font-medium">
-                Nos réalisations
+              <Button 
+                size="lg" 
+                variant="ghost" 
+                className="border border-white/40 bg-white/10 hover:bg-white/20 text-white text-base md:text-lg px-8 md:px-12 py-6 md:py-7 rounded-full font-medium backdrop-blur-md transition-all duration-300 hover:border-white/60"
+              >
+                Voir nos réalisations
               </Button>
             </Link>
           </div>

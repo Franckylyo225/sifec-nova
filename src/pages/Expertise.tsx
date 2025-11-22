@@ -331,10 +331,10 @@ const Expertise = () => {
       <section className="py-24 bg-secondary">
         <div className="container mx-auto px-6">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-serif font-bold mb-4">
-              Notre <span className="text-gradient-accent">Approche</span>
+            <h2 className="text-4xl md:text-5xl font-display font-bold mb-4">
+              Notre <span className="bg-gradient-to-r from-accent to-accent-light bg-clip-text text-transparent">Approche</span>
             </h2>
-            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+            <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto">
               Une méthodologie éprouvée pour garantir votre succès
             </p>
           </div>
@@ -350,7 +350,7 @@ const Expertise = () => {
                 <div className="mb-4 w-16 h-16 mx-auto bg-gradient-to-br from-accent to-accent-light rounded-full flex items-center justify-center">
                   <step.icon className="text-accent-foreground" size={28} />
                 </div>
-                <h3 className="text-xl font-serif font-semibold mb-2">{step.title}</h3>
+                <h3 className="text-xl font-display font-semibold mb-2">{step.title}</h3>
                 <p className="text-muted-foreground text-sm">{step.description}</p>
               </div>
             ))}
@@ -361,10 +361,10 @@ const Expertise = () => {
       {/* CTA Section */}
       <section className="py-24 bg-background">
         <div className="container mx-auto px-6 text-center">
-          <h2 className="text-4xl font-serif font-bold mb-6">
+          <h2 className="text-4xl md:text-5xl font-display font-bold mb-6">
             Prêt à développer votre communication ?
           </h2>
-          <p className="text-xl text-muted-foreground mb-10 max-w-2xl mx-auto">
+          <p className="text-lg md:text-xl text-muted-foreground mb-10 max-w-2xl mx-auto">
             Parlons de vos besoins et découvrez comment nous pouvons vous accompagner
           </p>
           <Link to="/contact">

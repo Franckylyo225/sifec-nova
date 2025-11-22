@@ -206,9 +206,10 @@ const Contact = () => {
                       <Button
                         type="submit"
                         size="lg"
-                        className="bg-primary hover:bg-primary-light text-primary-foreground h-12 px-8 rounded-lg font-medium transition-all hover:shadow-lg"
+                        className="bg-accent hover:bg-accent-light text-accent-foreground h-12 px-8 rounded-lg font-medium transition-all hover:shadow-lg"
                       >
                         Envoyer le message
+                        <Send className="ml-2" size={18} />
                       </Button>
                     </form>
                   </CardContent>

@@ -59,6 +59,62 @@ const UsersManagement = () => {
     setIsLoading(false);
   };
 
+  const handleApproveUser = async (userId: string, userName: string) => {
+    try {
+      const { data: { user } } = await supabase.auth.getUser();
+      
+      const { error } = await supabase
+        .from('profiles')
+        .update({ 
+          approved: true, 
+          approved_at: new Date().toISOString(),
+          approved_by: user?.id 
+        })
+        .eq('id', userId);
+
+      if (error) throw error;
+
+      toast({
+        title: 'Compte approuvé',
+        description: `Le compte de ${userName} a été approuvé`,
+      });
+
+      fetchUsers();
+    } catch (error: any) {
+      toast({
+        title: 'Erreur',
+        description: error.message || 'Impossible d\'approuver le compte',
+        variant: 'destructive',
+      });
+    }
+  };
+
+  const handleRejectUser = async (userId: string, userName: string) => {
+    if (!confirm(`Êtes-vous sûr de vouloir rejeter le compte de ${userName} ?`)) return;
+
+    try {
+      const { error } = await supabase
+        .from('profiles')
+        .update({ approved: false })
+        .eq('id', userId);
+
+      if (error) throw error;
+
+      toast({
+        title: 'Compte rejeté',
+        description: `Le compte de ${userName} a été rejeté`,
+      });
+
+      fetchUsers();
+    } catch (error: any) {
+      toast({
+        title: 'Erreur',
+        description: error.message || 'Impossible de rejeter le compte',
+        variant: 'destructive',
+      });
+    }
+  };
+
   const handleCreateAdmin = async (e: React.FormEvent) => {
     e.preventDefault();
     setErrors({});
@@ -95,7 +151,7 @@ const UsersManagement = () => {
         throw new Error('Impossible de créer l\'utilisateur');
       }
 
-      // Add role to user_roles table
+      // Add role to user_roles table if admin
       if (formData.role === 'admin') {
         const { error: roleError } = await supabase
           .from('user_roles')
@@ -103,6 +159,17 @@ const UsersManagement = () => {
 
         if (roleError) throw roleError;
       }
+
+      // Approve the account automatically if created by an admin
+      const { error: approveError } = await supabase
+        .from('profiles')
+        .update({ 
+          approved: true, 
+          approved_at: new Date().toISOString() 
+        })
+        .eq('id', authData.user.id);
+
+      if (approveError) console.error('Error approving user:', approveError);
 
       toast({
         title: 'Utilisateur créé',
@@ -313,6 +380,7 @@ const UsersManagement = () => {
               <TableRow>
                 <TableHead>Nom</TableHead>
                 <TableHead>Email</TableHead>
+                <TableHead>Statut</TableHead>
                 <TableHead>Rôle</TableHead>
                 <TableHead>Date de création</TableHead>
                 <TableHead className="text-right">Actions</TableHead>
@@ -321,25 +389,37 @@ const UsersManagement = () => {
             <TableBody>
               {isLoading ? (
                 <TableRow>
-                  <TableCell colSpan={5} className="text-center py-8">
+                  <TableCell colSpan={6} className="text-center py-8">
                     Chargement...
                   </TableCell>
                 </TableRow>
               ) : users.length === 0 ? (
                 <TableRow>
-                  <TableCell colSpan={5} className="text-center py-8 text-muted-foreground">
+                  <TableCell colSpan={6} className="text-center py-8 text-muted-foreground">
                     Aucun utilisateur trouvé
                   </TableCell>
                 </TableRow>
               ) : (
                 users.map((user) => {
                   const hasAdminRole = user.user_roles?.some((r: any) => r.role === 'admin');
+                  const isApproved = user.approved;
                   return (
                     <TableRow key={user.id}>
                       <TableCell className="font-medium">
                         {user.full_name || '-'}
                       </TableCell>
                       <TableCell>{user.email}</TableCell>
+                      <TableCell>
+                        {isApproved ? (
+                          <Badge variant="default" className="bg-green-600">
+                            Approuvé
+                          </Badge>
+                        ) : (
+                          <Badge variant="destructive">
+                            En attente
+                          </Badge>
+                        )}
+                      </TableCell>
                       <TableCell>
                         {hasAdminRole ? (
                           <Badge className="bg-primary">
@@ -355,14 +435,35 @@ const UsersManagement = () => {
                       </TableCell>
                       <TableCell className="text-right">
                         <div className="flex justify-end gap-2">
-                          <Button
-                            size="sm"
-                            variant={hasAdminRole ? 'outline' : 'default'}
-                            onClick={() => toggleAdmin(user.id, hasAdminRole)}
-                          >
-                            <Shield size={16} className="mr-1" />
-                            {hasAdminRole ? 'Retirer admin' : 'Promouvoir'}
-                          </Button>
+                          {!isApproved && (
+                            <Button
+                              size="sm"
+                              variant="default"
+                              onClick={() => handleApproveUser(user.id, user.full_name || user.email)}
+                              className="bg-green-600 hover:bg-green-700"
+                            >
+                              Approuver
+                            </Button>
+                          )}
+                          {isApproved && (
+                            <>
+                              <Button
+                                size="sm"
+                                variant={hasAdminRole ? 'outline' : 'default'}
+                                onClick={() => toggleAdmin(user.id, hasAdminRole)}
+                              >
+                                <Shield size={16} className="mr-1" />
+                                {hasAdminRole ? 'Retirer admin' : 'Promouvoir'}
+                              </Button>
+                              <Button
+                                size="sm"
+                                variant="outline"
+                                onClick={() => handleRejectUser(user.id, user.full_name || user.email)}
+                              >
+                                Rejeter
+                              </Button>
+                            </>
+                          )}
                           <Button
                             size="sm"
                             variant="ghost"

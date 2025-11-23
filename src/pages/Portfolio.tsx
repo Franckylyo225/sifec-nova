@@ -1,7 +1,7 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Building2, User, Briefcase, ArrowUpRight, Calendar, X } from "lucide-react";
-import portfolioHeroImage from "@/assets/portfolio-hero.jpg";
+import portfolioHeroImage from "@/assets/about-hero-team.jpg";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { useState } from "react";
 import ministereCultureMain from "@/assets/portfolio/ministere-culture-main.jpg";

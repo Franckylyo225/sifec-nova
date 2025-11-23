@@ -6,9 +6,21 @@ import { Mail, Phone, MapPin, Send } from "lucide-react";
 import { useState } from "react";
 import { useToast } from "@/hooks/use-toast";
 import contactHeroImage from "@/assets/contact-hero.jpg";
+import { supabase } from "@/integrations/supabase/client";
+import { z } from "zod";
+
+const contactSchema = z.object({
+  name: z.string().trim().min(2, "Le nom doit contenir au moins 2 caractères").max(100),
+  email: z.string().trim().email("Email invalide").max(255),
+  subject: z.string().trim().min(3, "Le sujet doit contenir au moins 3 caractères").max(200),
+  message: z.string().trim().min(10, "Le message doit contenir au moins 10 caractères").max(2000),
+  phone: z.string().trim().max(20).optional(),
+});
 
 const Contact = () => {
   const { toast } = useToast();
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [errors, setErrors] = useState<Record<string, string>>({});
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -17,13 +29,49 @@ const Contact = () => {
     message: "",
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    toast({
-      title: "Message envoyé !",
-      description: "Nous vous répondrons dans les plus brefs délais.",
-    });
-    setFormData({ name: "", email: "", phone: "", subject: "", message: "" });
+    setErrors({});
+    setIsSubmitting(true);
+
+    try {
+      const validation = contactSchema.safeParse(formData);
+      if (!validation.success) {
+        const fieldErrors: Record<string, string> = {};
+        validation.error.errors.forEach((err) => {
+          if (err.path[0]) {
+            fieldErrors[err.path[0].toString()] = err.message;
+          }
+        });
+        setErrors(fieldErrors);
+        setIsSubmitting(false);
+        return;
+      }
+
+      const { error } = await supabase.from('contact_messages').insert([{
+        name: formData.name,
+        email: formData.email,
+        phone: formData.phone || null,
+        subject: formData.subject,
+        message: formData.message,
+      }]);
+
+      if (error) throw error;
+
+      toast({
+        title: "Message envoyé !",
+        description: "Nous vous répondrons dans les plus brefs délais.",
+      });
+      setFormData({ name: "", email: "", phone: "", subject: "", message: "" });
+    } catch (error: any) {
+      toast({
+        title: "Erreur",
+        description: "Une erreur est survenue. Veuillez réessayer.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -154,6 +202,9 @@ const Contact = () => {
                             placeholder="Jean Dupont"
                             className="border-border h-12 bg-background"
                           />
+                          {errors.name && (
+                            <p className="text-sm text-destructive mt-1">{errors.name}</p>
+                          )}
                         </div>
                         <div>
                           <label htmlFor="email" className="block text-sm font-medium mb-2 text-foreground">
@@ -169,6 +220,9 @@ const Contact = () => {
                             placeholder="jean.dupont@example.com"
                             className="border-border h-12 bg-background"
                           />
+                          {errors.email && (
+                            <p className="text-sm text-destructive mt-1">{errors.email}</p>
+                          )}
                         </div>
                       </div>
 
@@ -185,6 +239,9 @@ const Contact = () => {
                           placeholder="Demande de devis"
                           className="border-border h-12 bg-background"
                         />
+                        {errors.subject && (
+                          <p className="text-sm text-destructive mt-1">{errors.subject}</p>
+                        )}
                       </div>
 
                       <div>
@@ -201,14 +258,18 @@ const Contact = () => {
                           rows={8}
                           className="border-border resize-none bg-background"
                         />
+                        {errors.message && (
+                          <p className="text-sm text-destructive mt-1">{errors.message}</p>
+                        )}
                       </div>
 
                       <Button
                         type="submit"
                         size="lg"
+                        disabled={isSubmitting}
                         className="bg-accent hover:bg-accent-light text-accent-foreground h-12 px-8 rounded-lg font-medium transition-all hover:shadow-lg"
                       >
-                        Envoyer le message
+                        {isSubmitting ? "Envoi en cours..." : "Envoyer le message"}
                         <Send className="ml-2" size={18} />
                       </Button>
                     </form>

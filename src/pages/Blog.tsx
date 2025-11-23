@@ -3,12 +3,15 @@ import { Badge } from "@/components/ui/badge";
 import { Calendar, Clock, ArrowRight, User } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import blogHeroImage from "@/assets/blog-hero.jpg";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { supabase } from "@/integrations/supabase/client";
 
 const Blog = () => {
   const navigate = useNavigate();
   const [selectedCategory, setSelectedCategory] = useState("Tous les articles");
+  const [articles, setArticles] = useState<any[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   const categories = [
     "Tous les articles",
@@ -20,72 +23,24 @@ const Blog = () => {
     "Tendances"
   ];
 
-  const articles = [
-    {
-      slug: "nouvelles-tendances-communication-2024",
-      category: "Stratégie",
-      title: "Les nouvelles tendances de la communication institutionnelle en 2024",
-      excerpt: "Découvrez comment les institutions publiques adaptent leur communication à l'ère du digital et des réseaux sociaux.",
-      date: "15 Mars 2024",
-      readTime: "8 min",
-      author: "Marie Kouassi",
-      image: "https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&q=80",
-      featured: true,
-    },
-    {
-      slug: "gerer-crise-reputation",
-      category: "Gestion de crise",
-      title: "Anticiper et gérer une crise de réputation : guide pratique",
-      excerpt: "Les étapes essentielles pour protéger votre image en situation de crise et en sortir renforcé.",
-      date: "10 Mars 2024",
-      readTime: "12 min",
-      author: "Jean-Marc Touré",
-      image: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=800&q=80",
-      featured: true,
-    },
-    {
-      slug: "art-storytelling-personnalites-publiques",
-      category: "Digital",
-      title: "L'art du storytelling pour les personnalités publiques",
-      excerpt: "Comment construire un récit authentique et engageant qui résonne avec votre audience.",
-      date: "5 Mars 2024",
-      readTime: "10 min",
-      author: "Sophie N'Guessan",
-      image: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=800&q=80",
-    },
-    {
-      slug: "relations-medias-cles-succes",
-      category: "Relations publiques",
-      title: "Optimiser ses relations avec les médias : les clés du succès",
-      excerpt: "Techniques éprouvées pour développer et maintenir des relations médiatiques durables et fructueuses.",
-      date: "28 Février 2024",
-      readTime: "7 min",
-      author: "Alain Bamba",
-      image: "https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=800&q=80",
-    },
-    {
-      slug: "personal-branding-leader-opinion",
-      category: "Leadership",
-      title: "Personal branding : devenir un leader d'opinion reconnu",
-      excerpt: "Les étapes pour construire et affirmer votre expertise dans votre domaine d'activité.",
-      date: "22 Février 2024",
-      readTime: "9 min",
-      author: "Fatou Diallo",
-      image: "https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=800&q=80",
-    },
-    {
-      slug: "intelligence-artificielle-communication",
-      category: "Tendances",
-      title: "Intelligence artificielle et communication : opportunités et défis",
-      excerpt: "Comment l'IA transforme les métiers de la communication et quelles sont les bonnes pratiques à adopter.",
-      date: "18 Février 2024",
-      readTime: "11 min",
-      author: "Patrick Koné",
-      image: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=800&q=80",
-    },
-  ];
+  useEffect(() => {
+    fetchArticles();
+  }, []);
 
-  const featuredArticles = articles.filter(article => article.featured);
+  const fetchArticles = async () => {
+    const { data, error } = await supabase
+      .from('articles')
+      .select('*')
+      .eq('archived', false)
+      .order('published_at', { ascending: false });
+
+    if (!error && data) {
+      setArticles(data);
+    }
+    setIsLoading(false);
+  };
+
+  const featuredArticles = articles.filter(article => article.featured).slice(0, 2);
   const regularArticles = articles.filter(article => !article.featured);
 
   const filteredArticles = selectedCategory === "Tous les articles"
@@ -116,7 +71,10 @@ const Blog = () => {
       {/* Featured Articles */}
       <section className="py-16 bg-background">
         <div className="container mx-auto px-6">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 max-w-7xl mx-auto">
+          {isLoading ? (
+            <div className="text-center py-12">Chargement...</div>
+          ) : featuredArticles.length > 0 ? (
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 max-w-7xl mx-auto">
             {featuredArticles.map((article, index) => (
               <Card
                 key={index}
@@ -126,7 +84,7 @@ const Blog = () => {
               >
                 <div
                   className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
-                  style={{ backgroundImage: `url(${article.image})` }}
+                  style={{ backgroundImage: `url(${article.image_url})` }}
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent" />
                 <CardContent className="relative h-full p-8 flex flex-col justify-end text-white">
@@ -151,7 +109,10 @@ const Blog = () => {
                 </CardContent>
               </Card>
             ))}
-          </div>
+            </div>
+          ) : (
+            <div className="text-center py-12 text-muted-foreground">Aucun article à la une</div>
+          )}
         </div>
       </section>
 
@@ -184,7 +145,10 @@ const Blog = () => {
 
             {/* Articles Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {filteredArticles.map((article, index) => (
+              {isLoading ? (
+                <div className="col-span-full text-center py-12">Chargement...</div>
+              ) : filteredArticles.length > 0 ? (
+                filteredArticles.map((article, index) => (
                 <Card
                   key={index}
                   onClick={() => navigate(`/blog/${article.slug}`)}
@@ -193,7 +157,7 @@ const Blog = () => {
                 >
                   <div
                     className="h-56 bg-cover bg-center transition-transform duration-500 group-hover:scale-110"
-                    style={{ backgroundImage: `url(${article.image})` }}
+                    style={{ backgroundImage: `url(${article.image_url})` }}
                   />
                   <CardContent className="p-6">
                     <Badge variant="secondary" className="mb-3">
@@ -216,7 +180,12 @@ const Blog = () => {
                     </div>
                   </CardContent>
                 </Card>
-              ))}
+              ))
+              ) : (
+                <div className="col-span-full text-center py-12 text-muted-foreground">
+                  Aucun article trouvé dans cette catégorie
+                </div>
+              )}
             </div>
           </div>
         </div>

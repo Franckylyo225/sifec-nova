@@ -189,30 +189,6 @@ const Portfolio = () => {
                   <h3 className="text-xl font-display font-bold mb-3">Description</h3>
                   <p className="text-foreground leading-relaxed">{selectedProject.description}</p>
                 </div>
-
-                {/* Challenge */}
-                {selectedProject.challenge && (
-                  <div>
-                    <h3 className="text-xl font-display font-bold mb-3">Le Défi</h3>
-                    <p className="text-foreground leading-relaxed">{selectedProject.challenge}</p>
-                  </div>
-                )}
-
-                {/* Solution */}
-                {selectedProject.solution && (
-                  <div>
-                    <h3 className="text-xl font-display font-bold mb-3">Notre Solution</h3>
-                    <p className="text-foreground leading-relaxed">{selectedProject.solution}</p>
-                  </div>
-                )}
-
-                {/* Results */}
-                {selectedProject.results && (
-                  <div>
-                    <h3 className="text-xl font-display font-bold mb-3">Résultats</h3>
-                    <p className="text-foreground leading-relaxed">{selectedProject.results}</p>
-                  </div>
-                )}
               </div>
             </>
           )}

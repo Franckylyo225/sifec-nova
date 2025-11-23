@@ -31,9 +31,6 @@ interface Project {
   client: string;
   category: string;
   description: string;
-  challenge: string;
-  solution: string;
-  results: string;
   main_image_url: string;
   secondary_image_url: string;
   completion_date: string;
@@ -45,6 +42,8 @@ const PortfolioManagement = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [dialogOpen, setDialogOpen] = useState(false);
   const [editingProject, setEditingProject] = useState<Project | null>(null);
+  const [isUploadingMainImage, setIsUploadingMainImage] = useState(false);
+  const [isUploadingSecondaryImage, setIsUploadingSecondaryImage] = useState(false);
   const { toast } = useToast();
 
   const [formData, setFormData] = useState({
@@ -53,9 +52,6 @@ const PortfolioManagement = () => {
     client: '',
     category: '',
     description: '',
-    challenge: '',
-    solution: '',
-    results: '',
     main_image_url: '',
     secondary_image_url: '',
     completion_date: '',
@@ -82,6 +78,46 @@ const PortfolioManagement = () => {
       setProjects(data || []);
     }
     setIsLoading(false);
+  };
+
+  const handleImageUpload = async (file: File, imageType: 'main' | 'secondary') => {
+    const setUploading = imageType === 'main' ? setIsUploadingMainImage : setIsUploadingSecondaryImage;
+    setUploading(true);
+    
+    try {
+      const fileExt = file.name.split('.').pop();
+      const fileName = `${Math.random()}.${fileExt}`;
+      const filePath = `${fileName}`;
+
+      const { error: uploadError } = await supabase.storage
+        .from('portfolio-images')
+        .upload(filePath, file);
+
+      if (uploadError) throw uploadError;
+
+      const { data: { publicUrl } } = supabase.storage
+        .from('portfolio-images')
+        .getPublicUrl(filePath);
+
+      if (imageType === 'main') {
+        setFormData({ ...formData, main_image_url: publicUrl });
+      } else {
+        setFormData({ ...formData, secondary_image_url: publicUrl });
+      }
+      
+      toast({
+        title: 'Image téléchargée',
+        description: `L'image ${imageType === 'main' ? 'principale' : 'secondaire'} a été téléchargée avec succès`,
+      });
+    } catch (error: any) {
+      toast({
+        title: 'Erreur',
+        description: 'Impossible de télécharger l\'image',
+        variant: 'destructive',
+      });
+    } finally {
+      setUploading(false);
+    }
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -176,9 +212,6 @@ const PortfolioManagement = () => {
       client: project.client,
       category: project.category,
       description: project.description,
-      challenge: project.challenge || '',
-      solution: project.solution || '',
-      results: project.results || '',
       main_image_url: project.main_image_url,
       secondary_image_url: project.secondary_image_url || '',
       completion_date: project.completion_date,
@@ -195,9 +228,6 @@ const PortfolioManagement = () => {
       client: '',
       category: '',
       description: '',
-      challenge: '',
-      solution: '',
-      results: '',
       main_image_url: '',
       secondary_image_url: '',
       completion_date: '',
@@ -278,57 +308,90 @@ const PortfolioManagement = () => {
                     value={formData.description}
                     onChange={(e) => setFormData({ ...formData, description: e.target.value })}
                     required
-                    rows={3}
-                  />
-                </div>
-
-                <div className="space-y-2">
-                  <Label htmlFor="challenge">Défi</Label>
-                  <Textarea
-                    id="challenge"
-                    value={formData.challenge}
-                    onChange={(e) => setFormData({ ...formData, challenge: e.target.value })}
-                    rows={2}
-                  />
-                </div>
-
-                <div className="space-y-2">
-                  <Label htmlFor="solution">Solution</Label>
-                  <Textarea
-                    id="solution"
-                    value={formData.solution}
-                    onChange={(e) => setFormData({ ...formData, solution: e.target.value })}
-                    rows={2}
-                  />
-                </div>
-
-                <div className="space-y-2">
-                  <Label htmlFor="results">Résultats</Label>
-                  <Textarea
-                    id="results"
-                    value={formData.results}
-                    onChange={(e) => setFormData({ ...formData, results: e.target.value })}
-                    rows={2}
+                    rows={4}
+                    placeholder="Décrivez le projet et ses objectifs..."
                   />
                 </div>
 
                 <div className="space-y-2">
                   <Label htmlFor="main_image_url">Image principale*</Label>
-                  <Input
-                    id="main_image_url"
-                    value={formData.main_image_url}
-                    onChange={(e) => setFormData({ ...formData, main_image_url: e.target.value })}
-                    required
+                  <div className="flex gap-2">
+                    <Input
+                      id="main_image_url"
+                      value={formData.main_image_url}
+                      onChange={(e) => setFormData({ ...formData, main_image_url: e.target.value })}
+                      placeholder="https://example.com/image.jpg"
+                      required
+                    />
+                    <Button
+                      type="button"
+                      variant="outline"
+                      onClick={() => document.getElementById('main-image-upload')?.click()}
+                      disabled={isUploadingMainImage}
+                    >
+                      {isUploadingMainImage ? 'Upload...' : 'Upload'}
+                    </Button>
+                  </div>
+                  <input
+                    id="main-image-upload"
+                    type="file"
+                    accept="image/*"
+                    className="hidden"
+                    onChange={(e) => {
+                      const file = e.target.files?.[0];
+                      if (file) handleImageUpload(file, 'main');
+                    }}
                   />
+                  {formData.main_image_url && (
+                    <img 
+                      src={formData.main_image_url} 
+                      alt="Aperçu principale" 
+                      className="w-full h-48 object-cover rounded-lg mt-2"
+                      onError={(e) => {
+                        e.currentTarget.style.display = 'none';
+                      }}
+                    />
+                  )}
                 </div>
 
                 <div className="space-y-2">
-                  <Label htmlFor="secondary_image_url">Image secondaire</Label>
-                  <Input
-                    id="secondary_image_url"
-                    value={formData.secondary_image_url}
-                    onChange={(e) => setFormData({ ...formData, secondary_image_url: e.target.value })}
+                  <Label htmlFor="secondary_image_url">Image secondaire (optionnelle)</Label>
+                  <div className="flex gap-2">
+                    <Input
+                      id="secondary_image_url"
+                      value={formData.secondary_image_url}
+                      onChange={(e) => setFormData({ ...formData, secondary_image_url: e.target.value })}
+                      placeholder="https://example.com/image2.jpg"
+                    />
+                    <Button
+                      type="button"
+                      variant="outline"
+                      onClick={() => document.getElementById('secondary-image-upload')?.click()}
+                      disabled={isUploadingSecondaryImage}
+                    >
+                      {isUploadingSecondaryImage ? 'Upload...' : 'Upload'}
+                    </Button>
+                  </div>
+                  <input
+                    id="secondary-image-upload"
+                    type="file"
+                    accept="image/*"
+                    className="hidden"
+                    onChange={(e) => {
+                      const file = e.target.files?.[0];
+                      if (file) handleImageUpload(file, 'secondary');
+                    }}
                   />
+                  {formData.secondary_image_url && (
+                    <img 
+                      src={formData.secondary_image_url} 
+                      alt="Aperçu secondaire" 
+                      className="w-full h-48 object-cover rounded-lg mt-2"
+                      onError={(e) => {
+                        e.currentTarget.style.display = 'none';
+                      }}
+                    />
+                  )}
                 </div>
 
                 <div className="space-y-2">

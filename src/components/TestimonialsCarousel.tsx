@@ -44,31 +44,47 @@ const testimonials = [
 export const TestimonialsCarousel = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
+  const [isTransitioning, setIsTransitioning] = useState(false);
 
   useEffect(() => {
     if (!isAutoPlaying) return;
 
     const interval = setInterval(() => {
-      setCurrentIndex((prev) => (prev + 1) % testimonials.length);
+      handleTransition((prev) => (prev + 1) % testimonials.length);
     }, 5000); // Change every 5 seconds
 
     return () => clearInterval(interval);
   }, [isAutoPlaying]);
 
+  const handleTransition = (indexOrCallback: number | ((prev: number) => number)) => {
+    setIsTransitioning(true);
+    setTimeout(() => {
+      if (typeof indexOrCallback === 'function') {
+        setCurrentIndex(indexOrCallback);
+      } else {
+        setCurrentIndex(indexOrCallback);
+      }
+      setTimeout(() => {
+        setIsTransitioning(false);
+      }, 50);
+    }, 300);
+  };
+
   const goToSlide = (index: number) => {
-    setCurrentIndex(index);
+    if (index === currentIndex) return;
+    handleTransition(index);
     setIsAutoPlaying(false);
     setTimeout(() => setIsAutoPlaying(true), 10000); // Resume autoplay after 10s
   };
 
   const goToPrevious = () => {
-    setCurrentIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length);
+    handleTransition((prev) => (prev - 1 + testimonials.length) % testimonials.length);
     setIsAutoPlaying(false);
     setTimeout(() => setIsAutoPlaying(true), 10000);
   };
 
   const goToNext = () => {
-    setCurrentIndex((prev) => (prev + 1) % testimonials.length);
+    handleTransition((prev) => (prev + 1) % testimonials.length);
     setIsAutoPlaying(false);
     setTimeout(() => setIsAutoPlaying(true), 10000);
   };
@@ -82,7 +98,13 @@ export const TestimonialsCarousel = () => {
         <Card className="border-border/50 bg-card shadow-2xl rounded-3xl overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-accent/5" />
           
-          <CardContent className="p-12 md:p-16 relative z-10">
+          <CardContent 
+            className={`p-12 md:p-16 relative z-10 transition-all duration-500 ${
+              isTransitioning 
+                ? 'opacity-0 translate-y-4' 
+                : 'opacity-100 translate-y-0'
+            }`}
+          >
             {/* Rating Stars */}
             <div className="flex gap-1 mb-8 justify-center">
               {[...Array(testimonial.rating)].map((_, i) => (

@@ -19,6 +19,60 @@ const BlogDetail = () => {
     fetchArticle();
   }, [slug]);
 
+  useEffect(() => {
+    if (article) {
+      // Update page title
+      document.title = article.meta_title || article.title || 'Article - SIFEC';
+      
+      // Update meta description
+      const metaDescription = document.querySelector('meta[name="description"]');
+      if (metaDescription) {
+        metaDescription.setAttribute('content', article.meta_description || article.excerpt || '');
+      } else {
+        const meta = document.createElement('meta');
+        meta.name = 'description';
+        meta.content = article.meta_description || article.excerpt || '';
+        document.head.appendChild(meta);
+      }
+
+      // Update meta keywords
+      const metaKeywords = document.querySelector('meta[name="keywords"]');
+      if (article.meta_keywords) {
+        if (metaKeywords) {
+          metaKeywords.setAttribute('content', article.meta_keywords);
+        } else {
+          const meta = document.createElement('meta');
+          meta.name = 'keywords';
+          meta.content = article.meta_keywords;
+          document.head.appendChild(meta);
+        }
+      }
+
+      // Open Graph tags for social sharing
+      const updateOgTag = (property: string, content: string) => {
+        let tag = document.querySelector(`meta[property="${property}"]`);
+        if (tag) {
+          tag.setAttribute('content', content);
+        } else {
+          tag = document.createElement('meta');
+          tag.setAttribute('property', property);
+          tag.setAttribute('content', content);
+          document.head.appendChild(tag);
+        }
+      };
+
+      updateOgTag('og:title', article.meta_title || article.title);
+      updateOgTag('og:description', article.meta_description || article.excerpt);
+      updateOgTag('og:image', article.image_url);
+      updateOgTag('og:type', 'article');
+    }
+
+    return () => {
+      // Reset to default title on unmount
+      document.title = 'SIFEC - Intelligence Communicationnelle';
+    };
+  }, [article]);
+
   const fetchArticle = async () => {
     setIsLoading(true);
     const { data, error } = await supabase

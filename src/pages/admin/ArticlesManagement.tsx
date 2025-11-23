@@ -47,6 +47,7 @@ const ArticlesManagement = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [dialogOpen, setDialogOpen] = useState(false);
   const [editingArticle, setEditingArticle] = useState<Article | null>(null);
+  const [isUploadingImage, setIsUploadingImage] = useState(false);
   const { toast } = useToast();
 
   const [formData, setFormData] = useState({
@@ -85,6 +86,40 @@ const ArticlesManagement = () => {
       setArticles(data || []);
     }
     setIsLoading(false);
+  };
+
+  const handleImageUpload = async (file: File) => {
+    setIsUploadingImage(true);
+    try {
+      const fileExt = file.name.split('.').pop();
+      const fileName = `${Math.random()}.${fileExt}`;
+      const filePath = `${fileName}`;
+
+      const { error: uploadError } = await supabase.storage
+        .from('blog-images')
+        .upload(filePath, file);
+
+      if (uploadError) throw uploadError;
+
+      const { data: { publicUrl } } = supabase.storage
+        .from('blog-images')
+        .getPublicUrl(filePath);
+
+      setFormData({ ...formData, image_url: publicUrl });
+      
+      toast({
+        title: 'Image téléchargée',
+        description: 'L\'image de couverture a été téléchargée avec succès',
+      });
+    } catch (error: any) {
+      toast({
+        title: 'Erreur',
+        description: 'Impossible de télécharger l\'image',
+        variant: 'destructive',
+      });
+    } finally {
+      setIsUploadingImage(false);
+    }
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -336,13 +371,33 @@ const ArticlesManagement = () => {
                     </div>
 
                     <div className="space-y-2">
-                      <Label htmlFor="image_url">URL de l'image de couverture*</Label>
-                      <Input
-                        id="image_url"
-                        value={formData.image_url}
-                        onChange={(e) => setFormData({ ...formData, image_url: e.target.value })}
-                        placeholder="https://example.com/image.jpg"
-                        required
+                      <Label htmlFor="image_url">Image de couverture*</Label>
+                      <div className="flex gap-2">
+                        <Input
+                          id="image_url"
+                          value={formData.image_url}
+                          onChange={(e) => setFormData({ ...formData, image_url: e.target.value })}
+                          placeholder="https://example.com/image.jpg"
+                          required
+                        />
+                        <Button
+                          type="button"
+                          variant="outline"
+                          onClick={() => document.getElementById('featured-image-upload')?.click()}
+                          disabled={isUploadingImage}
+                        >
+                          {isUploadingImage ? 'Upload...' : 'Upload'}
+                        </Button>
+                      </div>
+                      <input
+                        id="featured-image-upload"
+                        type="file"
+                        accept="image/*"
+                        className="hidden"
+                        onChange={(e) => {
+                          const file = e.target.files?.[0];
+                          if (file) handleImageUpload(file);
+                        }}
                       />
                       {formData.image_url && (
                         <img 

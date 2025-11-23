@@ -64,7 +64,7 @@ const Blog = () => {
           className="absolute inset-0 bg-cover bg-center"
           style={{ backgroundImage: `url(${blogHeroImage})` }}
         />
-        <div className="absolute inset-0 bg-gradient-to-br from-primary/90 to-primary-light/80" />
+        <div className="absolute inset-0 bg-primary/80" />
         <div className="container mx-auto px-6 relative z-10">
           <div className="max-w-4xl mx-auto text-center">
             <h1 className="text-5xl md:text-7xl font-display font-bold mb-6 animate-fade-in-up text-primary-foreground">

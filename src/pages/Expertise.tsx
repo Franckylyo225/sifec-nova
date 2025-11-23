@@ -16,7 +16,7 @@ import {
   Camera,
   Share2,
 } from "lucide-react";
-import expertiseHeroImage from "@/assets/expertise-hero.jpg";
+import expertiseHeroImage from "@/assets/about-hero-team.jpg";
 
 const Expertise = () => {
   const [activeIndex, setActiveIndex] = useState<number | null>(null);

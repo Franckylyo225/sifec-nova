@@ -169,6 +169,15 @@ const Home = () => {
                 Voir nos réalisations
               </Button>
             </Link>
+            <Link to="/contact" className="sm:ml-auto">
+              <Button 
+                size="lg" 
+                className="bg-accent hover:bg-accent-light text-white text-base md:text-lg px-8 md:px-12 py-6 md:py-7 rounded-full font-medium transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-2xl flex items-center gap-2"
+              >
+                Commencer l'aventure
+                <ArrowRight className="w-5 h-5" />
+              </Button>
+            </Link>
           </div>
         </div>
 

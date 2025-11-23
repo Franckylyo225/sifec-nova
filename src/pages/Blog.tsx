@@ -4,8 +4,10 @@ import { Calendar, Clock, ArrowRight, User } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import blogHeroImage from "@/assets/blog-hero.jpg";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Blog = () => {
+  const navigate = useNavigate();
   const [selectedCategory, setSelectedCategory] = useState("Tous les articles");
 
   const categories = [
@@ -20,6 +22,7 @@ const Blog = () => {
 
   const articles = [
     {
+      slug: "nouvelles-tendances-communication-2024",
       category: "Stratégie",
       title: "Les nouvelles tendances de la communication institutionnelle en 2024",
       excerpt: "Découvrez comment les institutions publiques adaptent leur communication à l'ère du digital et des réseaux sociaux.",
@@ -30,6 +33,7 @@ const Blog = () => {
       featured: true,
     },
     {
+      slug: "gerer-crise-reputation",
       category: "Gestion de crise",
       title: "Anticiper et gérer une crise de réputation : guide pratique",
       excerpt: "Les étapes essentielles pour protéger votre image en situation de crise et en sortir renforcé.",
@@ -40,6 +44,7 @@ const Blog = () => {
       featured: true,
     },
     {
+      slug: "art-storytelling-personnalites-publiques",
       category: "Digital",
       title: "L'art du storytelling pour les personnalités publiques",
       excerpt: "Comment construire un récit authentique et engageant qui résonne avec votre audience.",
@@ -49,6 +54,7 @@ const Blog = () => {
       image: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=800&q=80",
     },
     {
+      slug: "relations-medias-cles-succes",
       category: "Relations publiques",
       title: "Optimiser ses relations avec les médias : les clés du succès",
       excerpt: "Techniques éprouvées pour développer et maintenir des relations médiatiques durables et fructueuses.",
@@ -58,6 +64,7 @@ const Blog = () => {
       image: "https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=800&q=80",
     },
     {
+      slug: "personal-branding-leader-opinion",
       category: "Leadership",
       title: "Personal branding : devenir un leader d'opinion reconnu",
       excerpt: "Les étapes pour construire et affirmer votre expertise dans votre domaine d'activité.",
@@ -67,6 +74,7 @@ const Blog = () => {
       image: "https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=800&q=80",
     },
     {
+      slug: "intelligence-artificielle-communication",
       category: "Tendances",
       title: "Intelligence artificielle et communication : opportunités et défis",
       excerpt: "Comment l'IA transforme les métiers de la communication et quelles sont les bonnes pratiques à adopter.",
@@ -112,6 +120,7 @@ const Blog = () => {
             {featuredArticles.map((article, index) => (
               <Card
                 key={index}
+                onClick={() => navigate(`/blog/${article.slug}`)}
                 className="relative overflow-hidden rounded-3xl border-none shadow-xl group cursor-pointer h-[400px] hover-lift"
                 style={{ animationDelay: `${index * 0.1}s` }}
               >
@@ -178,6 +187,7 @@ const Blog = () => {
               {filteredArticles.map((article, index) => (
                 <Card
                   key={index}
+                  onClick={() => navigate(`/blog/${article.slug}`)}
                   className="overflow-hidden border-border bg-card group cursor-pointer hover-lift"
                   style={{ animationDelay: `${index * 0.1}s` }}
                 >

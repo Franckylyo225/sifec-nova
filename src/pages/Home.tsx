@@ -282,21 +282,6 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Nos dernières réalisations vidéo */}
-      <section className="py-32 bg-muted/30">
-        <div className="container mx-auto px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-display font-bold mb-4 tracking-tight">
-              Nos Dernières Réalisations
-            </h2>
-            <p className="text-xl text-muted-foreground font-light">
-              Découvrez nos projets vidéo récents
-            </p>
-          </div>
-
-          <VideoCarousel />
-        </div>
-      </section>
 
       {/* Section chiffres clés */}
       <section className="py-32 bg-gradient-to-br from-primary via-primary to-primary-light text-primary-foreground relative overflow-hidden">

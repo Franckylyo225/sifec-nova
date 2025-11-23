@@ -12,10 +12,10 @@ const Portfolio = () => {
   const [projects, setProjects] = useState<any[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
-  const yearsCount = useCountUp(4);
-  const clientsCount = useCountUp(15);
-  const projectsCount = useCountUp(70);
-  const satisfactionCount = useCountUp(98);
+  const yearsCount = useCountUp({ end: 4 });
+  const clientsCount = useCountUp({ end: 15 });
+  const projectsCount = useCountUp({ end: 70 });
+  const satisfactionCount = useCountUp({ end: 98 });
 
   useEffect(() => {
     fetchProjects();

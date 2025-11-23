@@ -6,6 +6,7 @@ import { ArrowRight, Target, Users, Lightbulb, Shield, Sparkles, TrendingUp, Arr
 import heroImage from "@/assets/hero-bg.jpg";
 import { useCountUp } from "@/hooks/useCountUp";
 import VideoCarousel from "@/components/VideoCarousel";
+import { TestimonialsCarousel } from "@/components/TestimonialsCarousel";
 import ministereCultureImg from "@/assets/portfolio/ministere-culture-main.jpg";
 import ceoFortuneImg from "@/assets/portfolio/ceo-fortune500-main.jpg";
 import groupeCac40Img from "@/assets/portfolio/groupe-cac40-main.jpg";
@@ -394,69 +395,7 @@ const Home = () => {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {[
-              {
-                name: "Marie Dupont",
-                role: "Ministre de la Culture",
-                avatar: "MD",
-                quote: "SIFEC a transformé notre communication institutionnelle avec une approche stratégique et innovante. Leur expertise nous a permis d'atteindre nos objectifs au-delà de nos attentes.",
-                rating: 5
-              },
-              {
-                name: "Jean-Paul Martin",
-                role: "PDG, Groupe Fortune 500",
-                avatar: "JPM",
-                quote: "Une équipe professionnelle et réactive qui comprend les enjeux de communication au plus haut niveau. Leur accompagnement a été déterminant pour notre image de marque.",
-                rating: 5
-              },
-              {
-                name: "Sophie Kouassi",
-                role: "Directrice Communication, Scale-up Tech",
-                avatar: "SK",
-                quote: "L'accompagnement de SIFEC nous a permis de structurer notre communication et de gagner en visibilité. Leur créativité et leur professionnalisme sont remarquables.",
-                rating: 5
-              }
-            ].map((testimonial, index) => (
-              <Card
-                key={index}
-                className="group relative border-border/50 bg-card hover:shadow-2xl transition-all duration-500 overflow-hidden rounded-3xl"
-                style={{ 
-                  animationDelay: `${index * 0.1}s`,
-                }}
-              >
-                <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-accent/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                
-                <CardContent className="p-8 relative z-10">
-                  {/* Rating Stars */}
-                  <div className="flex gap-1 mb-6">
-                    {[...Array(testimonial.rating)].map((_, i) => (
-                      <Star key={i} className="text-accent fill-accent" size={18} />
-                    ))}
-                  </div>
-
-                  {/* Quote */}
-                  <blockquote className="text-foreground leading-relaxed mb-8 font-light text-lg relative">
-                    <span className="absolute -top-2 -left-1 text-5xl text-primary/20 font-serif">"</span>
-                    <p className="relative z-10 italic">{testimonial.quote}</p>
-                  </blockquote>
-
-                  {/* Client Info */}
-                  <div className="flex items-center gap-4 pt-6 border-t border-border/50">
-                    <div className="relative flex h-14 w-14 shrink-0 overflow-hidden rounded-full bg-gradient-to-br from-primary to-primary-light">
-                      <div className="flex h-full w-full items-center justify-center text-white font-semibold text-lg">
-                        {testimonial.avatar}
-                      </div>
-                    </div>
-                    <div>
-                      <p className="font-semibold text-foreground">{testimonial.name}</p>
-                      <p className="text-sm text-muted-foreground font-light">{testimonial.role}</p>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
+          <TestimonialsCarousel />
         </div>
       </section>
 

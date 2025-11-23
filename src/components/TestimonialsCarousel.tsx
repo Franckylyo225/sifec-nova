@@ -5,37 +5,37 @@ import { ChevronLeft, ChevronRight, Star } from "lucide-react";
 
 const testimonials = [
   {
-    name: "Marie Dupont",
-    role: "Ministre de la Culture",
-    avatar: "MD",
+    name: "M. Guy-Marc AKA",
+    role: "Secrétaire Exécutif, Fondation Eranove",
+    avatar: "GMA",
     quote: "SIFEC a transformé notre communication institutionnelle avec une approche stratégique et innovante. Leur expertise nous a permis d'atteindre nos objectifs au-delà de nos attentes.",
     rating: 5
   },
   {
-    name: "Jean-Paul Martin",
-    role: "PDG, Groupe Fortune 500",
-    avatar: "JPM",
+    name: "Me Loan MESSAN",
+    role: "Batônnier, Ordre des avocats de Côte d'Ivoire",
+    avatar: "LM",
     quote: "Une équipe professionnelle et réactive qui comprend les enjeux de communication au plus haut niveau. Leur accompagnement a été déterminant pour notre image de marque.",
     rating: 5
   },
   {
-    name: "Sophie Kouassi",
-    role: "Directrice Communication, Scale-up Tech",
-    avatar: "SK",
+    name: "M. Abdoulaye Aliaguy",
+    role: "Coordinateur, Port Sec de Ferkéssédougou",
+    avatar: "AA",
     quote: "L'accompagnement de SIFEC nous a permis de structurer notre communication et de gagner en visibilité. Leur créativité et leur professionnalisme sont remarquables.",
     rating: 5
   },
   {
-    name: "Ahmed Touré",
-    role: "Directeur Général, Organisation Internationale",
-    avatar: "AT",
+    name: "M. Romain YORO",
+    role: "Directeur des Affaires Générales, CIPREL",
+    avatar: "RY",
     quote: "SIFEC a su comprendre nos besoins spécifiques et nous proposer des solutions adaptées. Leur professionnalisme et leur réactivité sont exemplaires.",
     rating: 5
   },
   {
-    name: "Claire Dubois",
-    role: "Ministre en exercice",
-    avatar: "CD",
+    name: "Mme DIOP",
+    role: "Directrice Générale, Les Résidences ACACIA",
+    avatar: "D",
     quote: "Une expertise remarquable en gestion de crise et communication sensible. SIFEC est un partenaire de confiance pour nos enjeux institutionnels majeurs.",
     rating: 5
   }

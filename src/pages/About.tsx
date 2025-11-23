@@ -1,6 +1,6 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Award, Heart, Globe, Zap } from "lucide-react";
-import aboutHeroImage from "@/assets/about-hero.jpg";
+import aboutHeroImage from "@/assets/about-hero-team.jpg";
 import teamPhoto from "@/assets/team-photo.jpg";
 
 

@@ -65,25 +65,25 @@ const Portfolio = () => {
       <section className="py-24 bg-background">
         <div className="container mx-auto px-6">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-5xl mx-auto">
-            <div className="text-center">
+            <div ref={yearsCount.ref} className="text-center">
               <div className="text-5xl md:text-6xl font-display font-bold text-primary mb-2">
                 {yearsCount.count}+
               </div>
               <div className="text-muted-foreground">Années d'expérience</div>
             </div>
-            <div className="text-center">
+            <div ref={clientsCount.ref} className="text-center">
               <div className="text-5xl md:text-6xl font-display font-bold text-primary mb-2">
                 {clientsCount.count}+
               </div>
               <div className="text-muted-foreground">Clients accompagnés</div>
             </div>
-            <div className="text-center">
+            <div ref={projectsCount.ref} className="text-center">
               <div className="text-5xl md:text-6xl font-display font-bold text-primary mb-2">
                 {projectsCount.count}+
               </div>
               <div className="text-muted-foreground">Projets réalisés</div>
             </div>
-            <div className="text-center">
+            <div ref={satisfactionCount.ref} className="text-center">
               <div className="text-5xl md:text-6xl font-display font-bold text-primary mb-2">
                 {satisfactionCount.count}%
               </div>

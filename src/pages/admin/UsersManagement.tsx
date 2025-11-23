@@ -51,11 +51,39 @@ const UsersManagement = () => {
 
   const fetchUsers = async () => {
     setIsLoading(true);
-    const { data } = await supabase
+    
+    // Fetch profiles
+    const { data: profiles, error: profilesError } = await supabase
       .from('profiles')
-      .select('*, user_roles(role)')
+      .select('*')
       .order('created_at', { ascending: false });
-    setUsers(data || []);
+
+    if (profilesError) {
+      toast({
+        title: 'Erreur',
+        description: 'Impossible de charger les utilisateurs',
+        variant: 'destructive',
+      });
+      setIsLoading(false);
+      return;
+    }
+
+    // Fetch roles for each user
+    const usersWithRoles = await Promise.all(
+      (profiles || []).map(async (profile) => {
+        const { data: roles } = await supabase
+          .from('user_roles')
+          .select('role')
+          .eq('user_id', profile.id);
+        
+        return {
+          ...profile,
+          user_roles: roles || []
+        };
+      })
+    );
+
+    setUsers(usersWithRoles);
     setIsLoading(false);
   };
 

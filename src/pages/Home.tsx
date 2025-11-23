@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { ArrowRight, Target, Users, Lightbulb, Shield, Sparkles, TrendingUp, ArrowUpRight, Award, Briefcase, TrendingUp as TrendingUpIcon, Star } from "lucide-react";
-import heroImage from "@/assets/hero-bg.jpg";
+import heroImage from "@/assets/hero-professional.png";
 import { useCountUp } from "@/hooks/useCountUp";
 import VideoCarousel from "@/components/VideoCarousel";
 import { TestimonialsCarousel } from "@/components/TestimonialsCarousel";

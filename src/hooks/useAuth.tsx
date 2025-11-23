@@ -57,6 +57,27 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
   const checkAdminRole = async (userId: string) => {
     try {
+      // Check if user is approved first
+      const { data: profile, error: profileError } = await supabase
+        .from('profiles')
+        .select('approved')
+        .eq('id', userId)
+        .maybeSingle();
+
+      if (profileError || !profile) {
+        console.error('Error checking profile:', profileError);
+        setIsAdmin(false);
+        setIsLoading(false);
+        return;
+      }
+
+      if (!profile.approved) {
+        setIsAdmin(false);
+        setIsLoading(false);
+        return;
+      }
+
+      // Then check admin role
       const { data, error } = await supabase
         .from('user_roles')
         .select('role')

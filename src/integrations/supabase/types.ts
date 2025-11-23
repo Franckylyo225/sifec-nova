@@ -166,6 +166,9 @@ export type Database = {
       }
       profiles: {
         Row: {
+          approved: boolean | null
+          approved_at: string | null
+          approved_by: string | null
           created_at: string | null
           email: string
           full_name: string | null
@@ -173,6 +176,9 @@ export type Database = {
           updated_at: string | null
         }
         Insert: {
+          approved?: boolean | null
+          approved_at?: string | null
+          approved_by?: string | null
           created_at?: string | null
           email: string
           full_name?: string | null
@@ -180,13 +186,24 @@ export type Database = {
           updated_at?: string | null
         }
         Update: {
+          approved?: boolean | null
+          approved_at?: string | null
+          approved_by?: string | null
           created_at?: string | null
           email?: string
           full_name?: string | null
           id?: string
           updated_at?: string | null
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "profiles_approved_by_fkey"
+            columns: ["approved_by"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       testimonials: {
         Row: {

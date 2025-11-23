@@ -8,6 +8,7 @@ import { Label } from '@/components/ui/label';
 import { useToast } from '@/hooks/use-toast';
 import { z } from 'zod';
 import logoBlue from '@/assets/logo-sifec-blue.png';
+import { supabase } from '@/integrations/supabase/client';
 
 const loginSchema = z.object({
   email: z.string().email('Email invalide'),
@@ -67,7 +68,7 @@ const AdminLogin = () => {
         } else {
           toast({
             title: 'Inscription réussie',
-            description: 'Votre compte a été créé. Contactez un administrateur pour obtenir les droits d\'accès.',
+            description: 'Votre compte a été créé. Un administrateur doit l\'approuver avant que vous puissiez vous connecter.',
           });
           setIsSignUp(false);
         }
@@ -86,11 +87,39 @@ const AdminLogin = () => {
 
         const { error } = await signIn(email, password);
         if (error) {
-          toast({
-            title: 'Erreur de connexion',
-            description: 'Email ou mot de passe incorrect',
-            variant: 'destructive',
-          });
+          // Check if account is not approved
+          if (error.message && error.message.includes('approved')) {
+            toast({
+              title: 'Compte en attente',
+              description: 'Votre compte doit être approuvé par un administrateur avant de pouvoir vous connecter.',
+              variant: 'destructive',
+            });
+          } else {
+            toast({
+              title: 'Erreur de connexion',
+              description: 'Email ou mot de passe incorrect',
+              variant: 'destructive',
+            });
+          }
+        } else {
+          // Additional check for approval after successful auth
+          const { data: { user } } = await supabase.auth.getUser();
+          if (user) {
+            const { data: profile } = await supabase
+              .from('profiles')
+              .select('approved')
+              .eq('id', user.id)
+              .maybeSingle();
+            
+            if (profile && !profile.approved) {
+              await supabase.auth.signOut();
+              toast({
+                title: 'Compte en attente',
+                description: 'Votre compte doit être approuvé par un administrateur avant de pouvoir vous connecter.',
+                variant: 'destructive',
+              });
+            }
+          }
         }
       }
     } catch (error: any) {

@@ -10,6 +10,10 @@ import { TestimonialsCarousel } from "@/components/TestimonialsCarousel";
 import ministereCultureImg from "@/assets/portfolio/ministere-culture-main.jpg";
 import ceoFortuneImg from "@/assets/portfolio/ceo-fortune500-main.jpg";
 import groupeCac40Img from "@/assets/portfolio/groupe-cac40-main.jpg";
+import fondationEranoveImg from "@/assets/partners/fondation-eranove.jpeg";
+import barreauCIImg from "@/assets/partners/barreau-ci.png";
+import ciprelImg from "@/assets/partners/ciprel.png";
+import ugpPsfImg from "@/assets/partners/ugp-psf.jpg";
 
 const Home = () => {
   const parallaxRef = useRef<HTMLDivElement>(null);
@@ -60,12 +64,10 @@ const Home = () => {
   ];
 
   const clients = [
-    { name: "Client 1", abbr: "C1" },
-    { name: "Client 2", abbr: "C2" },
-    { name: "Client 3", abbr: "C3" },
-    { name: "Client 4", abbr: "C4" },
-    { name: "Client 5", abbr: "C5" },
-    { name: "Client 6", abbr: "C6" },
+    { name: "Fondation Eranove", logo: fondationEranoveImg },
+    { name: "Ordre des Avocats - Barreau de Côte d'Ivoire", logo: barreauCIImg },
+    { name: "CIPREL", logo: ciprelImg },
+    { name: "UGP-PSF", logo: ugpPsfImg },
   ];
 
   const projects = [
@@ -314,15 +316,17 @@ const Home = () => {
             </h2>
           </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-5xl mx-auto">
             {clients.map((client, index) => (
               <div
                 key={index}
                 className="flex items-center justify-center p-8 bg-background rounded-2xl hover:shadow-lg transition-all duration-300 cursor-pointer group"
               >
-                <div className="text-4xl font-display font-bold text-muted-foreground/30 group-hover:text-primary/60 transition-colors duration-300">
-                  {client.abbr}
-                </div>
+                <img 
+                  src={client.logo} 
+                  alt={client.name}
+                  className="w-full h-auto object-contain max-h-20 opacity-60 group-hover:opacity-100 transition-opacity duration-300 grayscale group-hover:grayscale-0"
+                />
               </div>
             ))}
           </div>

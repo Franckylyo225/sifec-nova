@@ -1,8 +1,10 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { ArrowRight, Target, Users, Lightbulb, Shield, Sparkles, TrendingUp, ArrowUpRight, Award, Briefcase, TrendingUp as TrendingUpIcon, Star } from "lucide-react";
+import { ArrowRight, Target, Users, Lightbulb, Shield, Sparkles, TrendingUp, ArrowUpRight, Award, Briefcase, TrendingUp as TrendingUpIcon, Star, Building2, Calendar } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import heroImage from "@/assets/hero-professional.png";
 import { useCountUp } from "@/hooks/useCountUp";
 import VideoCarousel from "@/components/VideoCarousel";
@@ -16,6 +18,7 @@ import { supabase } from "@/integrations/supabase/client";
 
 const Home = () => {
   const parallaxRef = useRef<HTMLDivElement>(null);
+  const [selectedProject, setSelectedProject] = useState<any | null>(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -80,13 +83,7 @@ const Home = () => {
         .limit(3);
       
       if (error) throw error;
-      return data.map(project => ({
-        title: project.title,
-        category: project.category,
-        description: project.description,
-        image: project.main_image_url,
-        slug: project.slug,
-      }));
+      return data;
     },
   });
 
@@ -251,10 +248,11 @@ const Home = () => {
             {projects.map((project, index) => (
               <div
                 key={index}
+                onClick={() => setSelectedProject(project)}
                 className="group relative overflow-hidden rounded-3xl cursor-pointer"
                 style={{
                   aspectRatio: "4/5",
-                  backgroundImage: `url(${project.image})`,
+                  backgroundImage: `url(${project.main_image_url})`,
                   backgroundSize: "cover",
                   backgroundPosition: "center",
                 }}
@@ -270,7 +268,7 @@ const Home = () => {
                   <h3 className="text-2xl font-display font-bold text-white mb-3 group-hover:text-accent transition-colors duration-300">
                     {project.title}
                   </h3>
-                  <p className="text-white/80 font-light leading-relaxed mb-4">
+                  <p className="text-white/80 font-light leading-relaxed mb-4 line-clamp-2">
                     {project.description}
                   </p>
                   <div className="flex items-center text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">
@@ -423,6 +421,56 @@ const Home = () => {
           </Link>
         </div>
       </section>
+
+      {/* Project Detail Dialog */}
+      <Dialog open={selectedProject !== null} onOpenChange={() => setSelectedProject(null)}>
+        <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto">
+          {selectedProject && (
+            <>
+              <DialogHeader>
+                <DialogTitle className="text-3xl font-display font-bold mb-2">
+                  {selectedProject.title}
+                </DialogTitle>
+                <div className="flex flex-wrap gap-4 items-center text-sm text-muted-foreground">
+                  <div className="flex items-center gap-2">
+                    <Building2 size={16} />
+                    <span>{selectedProject.client}</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <Calendar size={16} />
+                    <span>{selectedProject.completion_date}</span>
+                  </div>
+                  <Badge variant="secondary">{selectedProject.category}</Badge>
+                </div>
+              </DialogHeader>
+
+              <div className="space-y-6 mt-6">
+                {/* Images */}
+                <div className="grid grid-cols-1 gap-4">
+                  <img
+                    src={selectedProject.main_image_url}
+                    alt={selectedProject.title}
+                    className="w-full h-80 object-cover rounded-lg"
+                  />
+                  {selectedProject.secondary_image_url && (
+                    <img
+                      src={selectedProject.secondary_image_url}
+                      alt={`${selectedProject.title} - 2`}
+                      className="w-full h-80 object-cover rounded-lg"
+                    />
+                  )}
+                </div>
+
+                {/* Description */}
+                <div>
+                  <h3 className="text-xl font-display font-bold mb-3">Description</h3>
+                  <p className="text-foreground leading-relaxed">{selectedProject.description}</p>
+                </div>
+              </div>
+            </>
+          )}
+        </DialogContent>
+      </Dialog>
     </div>
   );
 };

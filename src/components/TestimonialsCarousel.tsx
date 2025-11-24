@@ -85,6 +85,10 @@ export const TestimonialsCarousel = () => {
 
   const testimonial = testimonials[currentIndex];
 
+  if (!testimonial) {
+    return null;
+  }
+
   return (
     <div className="relative max-w-4xl mx-auto">
       {/* Main Testimonial Card */}

@@ -87,26 +87,20 @@ const Home = () => {
     },
   });
 
-  const insights = [
-    {
-      category: "Tendances",
-      title: "L'IA transforme la communication politique",
-      date: "15 Nov 2025",
-      readTime: "5 min",
+  const { data: insights = [] } = useQuery({
+    queryKey: ["articles-home"],
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from("articles")
+        .select("*")
+        .eq("archived", false)
+        .order("published_at", { ascending: false })
+        .limit(3);
+      
+      if (error) throw error;
+      return data;
     },
-    {
-      category: "Analyse",
-      title: "Nouvelles stratégies de gestion de crise",
-      date: "10 Nov 2025",
-      readTime: "7 min",
-    },
-    {
-      category: "Guide",
-      title: "Optimiser sa présence sur les réseaux sociaux",
-      date: "05 Nov 2025",
-      readTime: "4 min",
-    },
-  ];
+  });
 
   return (
     <div className="min-h-screen">
@@ -352,33 +346,40 @@ const Home = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {insights.map((insight, index) => (
-              <Card
-                key={index}
-                className="group border-border/50 bg-background hover:shadow-xl transition-all duration-500 cursor-pointer rounded-3xl overflow-hidden"
-              >
-                <CardContent className="p-8">
-                  <div className="flex items-center gap-3 mb-6">
-                    <span className="text-xs font-medium text-primary bg-primary/10 px-3 py-1 rounded-full">
-                      {insight.category}
-                    </span>
-                    <span className="text-xs text-muted-foreground">
-                      {insight.readTime} lecture
-                    </span>
-                  </div>
-                  
-                  <h3 className="text-xl font-display font-bold mb-4 group-hover:text-primary transition-colors duration-300 tracking-tight leading-tight">
-                    {insight.title}
-                  </h3>
-                  
-                  <div className="flex items-center justify-between mt-6">
-                    <span className="text-sm text-muted-foreground">{insight.date}</span>
-                    <div className="flex items-center text-primary opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                      <span className="text-sm font-medium">Lire</span>
-                      <ArrowUpRight size={16} className="ml-1" />
+              <Link key={index} to={`/blog/${insight.slug}`}>
+                <Card
+                  className="group border-border/50 bg-background hover:shadow-xl transition-all duration-500 cursor-pointer rounded-3xl overflow-hidden"
+                >
+                  <CardContent className="p-8">
+                    <div className="flex items-center gap-3 mb-6">
+                      <span className="text-xs font-medium text-primary bg-primary/10 px-3 py-1 rounded-full">
+                        {insight.category}
+                      </span>
+                      <span className="text-xs text-muted-foreground">
+                        {insight.read_time} lecture
+                      </span>
                     </div>
-                  </div>
-                </CardContent>
-              </Card>
+                    
+                    <h3 className="text-xl font-display font-bold mb-4 group-hover:text-primary transition-colors duration-300 tracking-tight leading-tight">
+                      {insight.title}
+                    </h3>
+                    
+                    <div className="flex items-center justify-between mt-6">
+                      <span className="text-sm text-muted-foreground">
+                        {new Date(insight.published_at || insight.created_at).toLocaleDateString('fr-FR', { 
+                          day: 'numeric', 
+                          month: 'short', 
+                          year: 'numeric' 
+                        })}
+                      </span>
+                      <div className="flex items-center text-primary opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <span className="text-sm font-medium">Lire</span>
+                        <ArrowUpRight size={16} className="ml-1" />
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              </Link>
             ))}
           </div>
         </div>

@@ -2,49 +2,35 @@ import { useState, useEffect } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { ChevronLeft, ChevronRight, Star } from "lucide-react";
-
-const testimonials = [
-  {
-    name: "M. Guy-Marc AKA",
-    role: "Secrétaire Exécutif, Fondation Eranove",
-    avatar: "GMA",
-    quote: "SIFEC a transformé notre communication institutionnelle avec une approche stratégique et innovante. Leur expertise nous a permis d'atteindre nos objectifs au-delà de nos attentes.",
-    rating: 5
-  },
-  {
-    name: "Me Loan MESSAN",
-    role: "Batônnier, Ordre des avocats de Côte d'Ivoire",
-    avatar: "LM",
-    quote: "Une équipe professionnelle et réactive qui comprend les enjeux de communication au plus haut niveau. Leur accompagnement a été déterminant pour notre image de marque.",
-    rating: 5
-  },
-  {
-    name: "M. Abdoulaye Aliaguy",
-    role: "Coordinateur, Port Sec de Ferkéssédougou",
-    avatar: "AA",
-    quote: "L'accompagnement de SIFEC nous a permis de structurer notre communication et de gagner en visibilité. Leur créativité et leur professionnalisme sont remarquables.",
-    rating: 5
-  },
-  {
-    name: "M. Romain YORO",
-    role: "Directeur des Affaires Générales, CIPREL",
-    avatar: "RY",
-    quote: "SIFEC a su comprendre nos besoins spécifiques et nous proposer des solutions adaptées. Leur professionnalisme et leur réactivité sont exemplaires.",
-    rating: 5
-  },
-  {
-    name: "Mme DIOP",
-    role: "Directrice Générale, Les Résidences ACACIA",
-    avatar: "D",
-    quote: "Une expertise remarquable en gestion de crise et communication sensible. SIFEC est un partenaire de confiance pour nos enjeux institutionnels majeurs.",
-    rating: 5
-  }
-];
+import { useQuery } from "@tanstack/react-query";
+import { supabase } from "@/integrations/supabase/client";
 
 export const TestimonialsCarousel = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
   const [isTransitioning, setIsTransitioning] = useState(false);
+
+  const { data: testimonials = [] } = useQuery({
+    queryKey: ["testimonials"],
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from("testimonials")
+        .select("*")
+        .eq("archived", false)
+        .order("created_at", { ascending: false });
+      
+      if (error) throw error;
+      
+      // Transform data to match component format
+      return data.map(testimonial => ({
+        name: testimonial.client_name,
+        role: `${testimonial.client_position}, ${testimonial.client_company}`,
+        avatar: testimonial.client_name.split(' ').map(n => n[0]).join('').toUpperCase().slice(0, 3),
+        quote: testimonial.testimonial_text,
+        rating: testimonial.rating || 5
+      }));
+    },
+  });
 
   useEffect(() => {
     if (!isAutoPlaying) return;
@@ -71,7 +57,7 @@ export const TestimonialsCarousel = () => {
   };
 
   const goToSlide = (index: number) => {
-    if (index === currentIndex) return;
+    if (index === currentIndex || !testimonials.length) return;
     handleTransition(index);
     setIsAutoPlaying(false);
     setTimeout(() => setIsAutoPlaying(true), 10000); // Resume autoplay after 10s
@@ -88,6 +74,14 @@ export const TestimonialsCarousel = () => {
     setIsAutoPlaying(false);
     setTimeout(() => setIsAutoPlaying(true), 10000);
   };
+
+  if (!testimonials.length) {
+    return (
+      <div className="text-center text-muted-foreground py-12">
+        Aucun témoignage disponible pour le moment.
+      </div>
+    );
+  }
 
   const testimonial = testimonials[currentIndex];
 

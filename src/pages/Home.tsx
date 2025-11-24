@@ -7,13 +7,12 @@ import heroImage from "@/assets/hero-professional.png";
 import { useCountUp } from "@/hooks/useCountUp";
 import VideoCarousel from "@/components/VideoCarousel";
 import { TestimonialsCarousel } from "@/components/TestimonialsCarousel";
-import ministereCultureImg from "@/assets/portfolio/ministere-culture-main.jpg";
-import ceoFortuneImg from "@/assets/portfolio/ceo-fortune500-main.jpg";
-import groupeCac40Img from "@/assets/portfolio/groupe-cac40-main.jpg";
 import fondationEranoveImg from "@/assets/partners/fondation-eranove.jpeg";
 import barreauCIImg from "@/assets/partners/barreau-ci.png";
 import ciprelImg from "@/assets/partners/ciprel.png";
 import ugpPsfImg from "@/assets/partners/ugp-psf.jpg";
+import { useQuery } from "@tanstack/react-query";
+import { supabase } from "@/integrations/supabase/client";
 
 const Home = () => {
   const parallaxRef = useRef<HTMLDivElement>(null);
@@ -70,26 +69,26 @@ const Home = () => {
     { name: "UGP-PSF", logo: ugpPsfImg },
   ];
 
-  const projects = [
-    {
-      title: "Ministère de la Culture",
-      category: "Institutionnel",
-      description: "Stratégie de communication pour le lancement d'une nouvelle politique culturelle nationale",
-      image: ministereCultureImg,
+  const { data: projects = [] } = useQuery({
+    queryKey: ["portfolio-home"],
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from("portfolio_projects")
+        .select("*")
+        .eq("archived", false)
+        .order("completion_date", { ascending: false })
+        .limit(3);
+      
+      if (error) throw error;
+      return data.map(project => ({
+        title: project.title,
+        category: project.category,
+        description: project.description,
+        image: project.main_image_url,
+        slug: project.slug,
+      }));
     },
-    {
-      title: "PDG Fortune 500",
-      category: "Personnalité publique",
-      description: "Personal branding et gestion de crise pour un dirigeant multinational",
-      image: ceoFortuneImg,
-    },
-    {
-      title: "Groupe CAC 40",
-      category: "Corporate",
-      description: "Accompagnement communication lors d'une fusion-acquisition majeure",
-      image: groupeCac40Img,
-    },
-  ];
+  });
 
   const insights = [
     {

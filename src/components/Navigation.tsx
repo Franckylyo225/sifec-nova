@@ -89,7 +89,9 @@ const Navigation = () => {
 
           {/* Mobile Menu Button */}
           <button
-            className="md:hidden text-foreground p-2"
+            className={`md:hidden p-2 transition-colors duration-300 ${
+              isScrolled || !isHomePage ? "text-foreground" : "text-white"
+            }`}
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             aria-label="Toggle menu"
           >
@@ -99,7 +101,7 @@ const Navigation = () => {
 
         {/* Mobile Menu */}
         {isMobileMenuOpen && (
-          <div className="md:hidden mt-6 pb-4 animate-fade-in-up">
+          <div className="md:hidden mt-6 pb-4 bg-background rounded-lg px-4 py-6 shadow-lg animate-fade-in-up">
             <div className="flex flex-col space-y-6">
               {navLinks.map((link) => (
                 <Link
@@ -107,13 +109,9 @@ const Navigation = () => {
                   to={link.path}
                   onClick={() => setIsMobileMenuOpen(false)}
                   className={`text-lg font-medium tracking-tight transition-all duration-300 hover:scale-105 hover:translate-x-2 ${
-                    isScrolled || !isHomePage
-                      ? location.pathname === link.path
-                        ? "text-primary"
-                        : "text-foreground hover:text-primary"
-                      : location.pathname === link.path
-                      ? "text-white"
-                      : "text-white/80 hover:text-white"
+                    location.pathname === link.path
+                      ? "text-primary"
+                      : "text-foreground hover:text-primary"
                   }`}
                 >
                   {link.label}

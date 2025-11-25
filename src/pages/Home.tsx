@@ -6,6 +6,7 @@ import { ArrowRight, Target, Users, Lightbulb, Shield, Sparkles, TrendingUp, Arr
 import { Badge } from "@/components/ui/badge";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import heroImage from "@/assets/hero-professional.png";
+import logoHero from "@/assets/logo-sifec-hero.png";
 import { useCountUp } from "@/hooks/useCountUp";
 import VideoCarousel from "@/components/VideoCarousel";
 import { TestimonialsCarousel } from "@/components/TestimonialsCarousel";
@@ -129,17 +130,19 @@ const Home = () => {
 
         {/* Hero Content - Apple-inspired spacing and typography */}
         <div className="container mx-auto px-6 md:px-12 text-center z-10 max-w-7xl">
-          <h1 className="text-6xl md:text-8xl lg:text-9xl font-display font-bold mb-6 md:mb-8 animate-fade-in-up text-white tracking-tighter leading-[0.95]">
-            <span className="block mb-2 md:mb-3 bg-gradient-to-r from-white via-white to-white/80 bg-clip-text text-transparent">
-              SIFEC
-            </span>
-            <span className="block text-4xl md:text-6xl lg:text-7xl font-light tracking-tight leading-tight text-white/95">
-              L'expertise qui donne du{" "}
+          <div className="mb-6 md:mb-8 animate-fade-in-up">
+            <img 
+              src={logoHero} 
+              alt="SIFEC" 
+              className="w-48 md:w-64 lg:w-80 mx-auto mb-6 md:mb-8"
+            />
+            <h1 className="text-4xl md:text-6xl lg:text-7xl font-display font-light tracking-tight leading-tight text-white/95">
+              — L'expertise qui donne du{" "}
               <span className="font-semibold bg-gradient-to-r from-accent to-accent-light bg-clip-text text-transparent">
                 pouvoir à votre image
               </span>
-            </span>
-          </h1>
+            </h1>
+          </div>
           <p className="text-lg md:text-2xl lg:text-3xl mb-12 md:mb-16 max-w-4xl mx-auto animate-fade-in-up text-white/80 font-light leading-relaxed" style={{ animationDelay: "0.15s" }}>
             Votre partenaire stratégique pour une communication institutionnelle forte, cohérente et performante.
           </p>

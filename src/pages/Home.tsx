@@ -137,7 +137,7 @@ const Home = () => {
               className="w-48 md:w-64 lg:w-80 mx-auto mb-6 md:mb-8"
             />
             <h1 className="text-4xl md:text-6xl lg:text-7xl font-display font-light tracking-tight leading-tight text-white/95">
-              — L'expertise qui donne du{" "}
+              L'expertise qui donne du{" "}
               <span className="font-semibold bg-gradient-to-r from-accent to-accent-light bg-clip-text text-transparent">
                 pouvoir à votre image
               </span>

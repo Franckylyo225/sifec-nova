@@ -33,14 +33,20 @@ export const TestimonialsCarousel = () => {
   });
 
   useEffect(() => {
-    if (!isAutoPlaying) return;
+    if (!isAutoPlaying || testimonials.length === 0) return;
 
     const interval = setInterval(() => {
-      handleTransition((prev) => (prev + 1) % testimonials.length);
+      setIsTransitioning(true);
+      setTimeout(() => {
+        setCurrentIndex((prev) => (prev + 1) % testimonials.length);
+        setTimeout(() => {
+          setIsTransitioning(false);
+        }, 50);
+      }, 300);
     }, 5000); // Change every 5 seconds
 
     return () => clearInterval(interval);
-  }, [isAutoPlaying]);
+  }, [isAutoPlaying, testimonials.length]);
 
   const handleTransition = (indexOrCallback: number | ((prev: number) => number)) => {
     setIsTransitioning(true);

@@ -14,6 +14,7 @@ import fondationEranoveImg from "@/assets/partners/fondation-eranove.jpeg";
 import barreauCIImg from "@/assets/partners/barreau-ci.png";
 import ciprelImg from "@/assets/partners/ciprel.png";
 import ugpPsfImg from "@/assets/partners/ugp-psf.jpg";
+import byomaImg from "@/assets/partners/byoma.jpeg";
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 
@@ -71,6 +72,7 @@ const Home = () => {
     { name: "Ordre des Avocats - Barreau de Côte d'Ivoire", logo: barreauCIImg },
     { name: "CIPREL", logo: ciprelImg },
     { name: "UGP-PSF", logo: ugpPsfImg },
+    { name: "Les Résidences BYOMA", logo: byomaImg },
   ];
 
   const { data: projects = [] } = useQuery({

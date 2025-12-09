@@ -245,7 +245,7 @@ const Expertise = () => {
               { icon: BookOpen, title: "Analyse", description: "Audit approfondi de votre situation" },
               { icon: Lightbulb, title: "Stratégie", description: "Élaboration d'un plan sur mesure" },
               { icon: Megaphone, title: "Exécution", description: "Mise en œuvre rigoureuse" },
-              { icon: TrendingUp, title: "Optimisation", description: "Mesure et ajustements continus" },
+              { icon: TrendingUp, title: "Conseil", description: "Mesure et ajustements continus" },
             ].map((step, index) => (
               <div key={index} className="text-center">
                 <div className="mb-4 w-16 h-16 mx-auto bg-gradient-to-br from-accent to-accent-light rounded-full flex items-center justify-center">

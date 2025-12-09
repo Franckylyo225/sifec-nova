@@ -15,6 +15,9 @@ import barreauCIImg from "@/assets/partners/barreau-ci.png";
 import ciprelImg from "@/assets/partners/ciprel.png";
 import ugpPsfImg from "@/assets/partners/ugp-psf.jpg";
 import byomaImg from "@/assets/partners/byoma.jpeg";
+import newWaveImg from "@/assets/partners/new-wave.png";
+import coeurDeLettresImg from "@/assets/partners/coeur-de-lettres.jpg";
+import didigaFestivalImg from "@/assets/partners/didiga-festival.png";
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 
@@ -73,6 +76,9 @@ const Home = () => {
     { name: "CIPREL", logo: ciprelImg },
     { name: "UGP-PSF", logo: ugpPsfImg },
     { name: "Les Résidences BYOMA", logo: byomaImg },
+    { name: "New Wave Conception", logo: newWaveImg },
+    { name: "Coeur de Lettres", logo: coeurDeLettresImg },
+    { name: "Didiga Festival", logo: didigaFestivalImg },
   ];
 
   const { data: projects = [] } = useQuery({

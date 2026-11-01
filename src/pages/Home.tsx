@@ -18,6 +18,7 @@ import byomaImg from "@/assets/partners/byoma.jpeg";
 import newWaveImg from "@/assets/partners/new-wave.png";
 import coeurDeLettresImg from "@/assets/partners/coeur-de-lettres.jpg";
 import didigaFestivalImg from "@/assets/partners/didiga-festival.png";
+import sfaImg from "@/assets/partners/sfa.png";
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 
@@ -79,6 +80,7 @@ const Home = () => {
     { name: "New Wave Conception", logo: newWaveImg },
     { name: "Coeur de Lettres", logo: coeurDeLettresImg },
     { name: "Didiga Festival", logo: didigaFestivalImg },
+    { name: "SFA - Se Former Autrement", logo: sfaImg },
   ];
 
   const { data: projects = [] } = useQuery({
